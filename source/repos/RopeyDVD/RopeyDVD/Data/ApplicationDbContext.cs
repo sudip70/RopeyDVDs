@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RopeyDVD.Models;
-
+using RopeyDVD.Models.ViewModels;
 
 namespace RopeyDVD.Data
 {
@@ -9,6 +9,10 @@ namespace RopeyDVD.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
 
+        }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
         }
         public DbSet<Actor>? Actors { get; set; }
         public DbSet<Studio>? Studios { get; set; }
@@ -22,7 +26,7 @@ namespace RopeyDVD.Data
         public DbSet<DVDCopy>? DVDCopies { get; set; }
         public DbSet<Loan>? Loans { get; set; }
         public DbSet<CastMember>? CastMembers { get; set; }
-        public DbSet<UserLoginModel>? UserLoginModels { get; set; }
+        public DbSet<UserDetailsViewModel> UserDetailsViewModel { get; set; }
 
     }
 }

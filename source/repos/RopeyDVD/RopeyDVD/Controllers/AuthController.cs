@@ -1,178 +1,176 @@
 ﻿#nullable disable
 using System;
 using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
-using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 using RopeyDVD.Data;
 using RopeyDVD.Models;
-using RopeyDVD.Models.Identity;
-using RopeyDVD.Models.ViewModels;
 
 namespace RopeyDVD.Controllers
 {
     public class AuthController : Controller
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly IConfiguration _configuration;
+        private readonly ApplicationDbContext _context;
 
-        public AuthController(
-            UserManager<IdentityUser> userManager,
-            RoleManager<IdentityRole> roleManager,
-            IConfiguration configuration)
+        public AuthController(ApplicationDbContext context)
         {
-            _userManager = userManager;
-            _roleManager = roleManager;
-            _configuration = configuration;
+            _context = context;
         }
-        public IActionResult Index()
+
+        // GET: Auth
+        public async Task<IActionResult> Index()
+        {
+            return View(await _context.Users.ToListAsync());
+        }
+
+        // GET: Auth/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var user = await _context.Users
+                .FirstOrDefaultAsync(m => m.UserNumber == id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return View(user);
+        }
+
+        // GET: Auth/Create
+        public IActionResult Create()
         {
             return View();
         }
 
-        public IActionResult UserDetails()
-        {
-            return View();
-        }
-
-        // GET: Authentication/Login
-        public IActionResult Login()
-        {
-            return View();
-        }
-
+        // POST: Auth/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(UserLoginModel loginModel)
+        public async Task<IActionResult> Create([Bind("UserNumber,UserName,UserType,UserPassword")] User user)
         {
-            var user = await _userManager.FindByNameAsync(loginModel.UserName);
-            if (user != null && await _userManager.CheckPasswordAsync(user, loginModel.UserPassword))
+            if (ModelState.IsValid)
             {
-                var userRoles = await _userManager.GetRolesAsync(user);
+                _context.Add(user);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(user);
+        }
 
-                var authClaims = new List<Claim>
-                {
-                    new Claim(ClaimTypes.Name, user.UserName),
-                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                };
+        // GET: Auth/Edit/5
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-                foreach (var userRole in userRoles)
+            var user = await _context.Users.FindAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return View(user);
+        }
+
+        // POST: Auth/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("UserNumber,UserName,UserType,UserPassword")] User user)
+        {
+            if (id != user.UserNumber)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
                 {
-                    authClaims.Add(new Claim(ClaimTypes.Role, userRole));
+                    _context.Update(user);
+                    await _context.SaveChangesAsync();
                 }
-
-                var token = GetToken(authClaims);
-
-                UserDetailsViewModel userDetails = new UserDetailsViewModel()
+                catch (DbUpdateConcurrencyException)
                 {
-                    UserName = user.UserName,
-                    Email = user.Email,
-                    Token = new JwtSecurityTokenHandler().WriteToken(token),
-                    Expiration = token.ValidTo
-                };
-                ViewBag.User = userDetails;
-                return RedirectToAction("UserDetails", ViewBag.User);
+                    if (!UserExists(user.UserNumber))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
             }
-            return RedirectToAction("UnauthorizedAccess");
+            return View(user);
         }
 
-        // GET: Authentication/RegisterUser
-        public IActionResult Register()
+        // GET: Auth/Delete/5
+        public async Task<IActionResult> Delete(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var user = await _context.Users
+                .FirstOrDefaultAsync(m => m.UserNumber == id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return View(user);
         }
 
-        [HttpPost]
+        // POST: Auth/Delete/5
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register([FromBody] User model)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var userExists = await _userManager.FindByNameAsync(model.UserName);
-            if (userExists != null)
-                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User already exists!" });
-
-            IdentityUser user = new()
-            {
-                //UserType = model.UserType,
-                SecurityStamp = Guid.NewGuid().ToString(),
-                UserName = model.UserName
-            };
-            var result = await _userManager.CreateAsync(user, model.UserPassword);
-            if (!result.Succeeded)
-                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User creation failed! Please check user details and try again." });
-            return RedirectToAction("Index", "Home");
+            var user = await _context.Users.FindAsync(id);
+            _context.Users.Remove(user);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
 
-        // GET: Authentication/RegisterAdmin
-        public IActionResult RegisterAdmin()
+        private bool UserExists(int id)
         {
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> RegisterAdmin(User model)
-        {
-            var userExists = await _userManager.FindByNameAsync(model.UserName);
-            if (userExists != null)
-                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User already exists!" });
-
-            IdentityUser user = new()
-            {
-                //User = model.UserType,
-                SecurityStamp = Guid.NewGuid().ToString(),
-                UserName = model.UserName
-            };
-            var result = await _userManager.CreateAsync(user, model.UserPassword);
-            if (!result.Succeeded)
-                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User creation failed! Please check user details and try again." });
-
-            if (!await _roleManager.RoleExistsAsync(UserRoles.Admin))
-                await _roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
-            if (!await _roleManager.RoleExistsAsync(UserRoles.User))
-                await _roleManager.CreateAsync(new IdentityRole(UserRoles.User));
-
-            if (await _roleManager.RoleExistsAsync(UserRoles.Admin))
-            {
-                await _userManager.AddToRoleAsync(user, UserRoles.Admin);
-            }
-            if (await _roleManager.RoleExistsAsync(UserRoles.Admin))
-            {
-                await _userManager.AddToRoleAsync(user, UserRoles.User);
-            }
-            return RedirectToAction("Index", "Home");
-
-        }
-
-        public IActionResult UnauthorizedAccess()
-        {
-            return View();
-        }
-
-
-        private JwtSecurityToken GetToken(List<Claim> authClaims)
-        {
-            var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
-
-            var token = new JwtSecurityToken(
-                issuer: _configuration["JWT:ValidIssuer"],
-                audience: _configuration["JWT:ValidAudience"],
-                expires: DateTime.Now.AddHours(3),
-                claims: authClaims,
-                signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
-                );
-
-            return token;
+            return _context.Users.Any(e => e.UserNumber == id);
         }
     }
 }
+
+
+//#nullable disable
+//using System;
+//using System.Collections.Generic;
+//using System.IdentityModel.Tokens.Jwt;
+//using System.Linq;
+//using System.Security.Claims;
+//using System.Text;
+//using System.Threading.Tasks;
+//using Microsoft.AspNetCore.Identity;
+//using Microsoft.AspNetCore.Mvc;
+//using Microsoft.AspNetCore.Mvc.Rendering;
+//using Microsoft.EntityFrameworkCore;
+//using Microsoft.IdentityModel.Tokens;
+//using RopeyDVD.Data;
+//using RopeyDVD.Models;
+//using RopeyDVD.Models.Identity;
+//using RopeyDVD.Models.ViewModels;
 
 //namespace RopeyDVD.Controllers
 //{
@@ -196,6 +194,11 @@ namespace RopeyDVD.Controllers
 //            return View();
 //        }
 
+//        public IActionResult UserDetails()
+//        {
+//            return View();
+//        }
+
 //        // GET: Authentication/Login
 //        public IActionResult Login()
 //        {
@@ -206,8 +209,8 @@ namespace RopeyDVD.Controllers
 //        [ValidateAntiForgeryToken]
 //        public async Task<IActionResult> Login(UserLoginModel loginModel)
 //        {
-//            var user = await _userManager.FindByNameAsync(loginModel.Username);
-//            if (user != null && await _userManager.CheckPasswordAsync(user, loginModel.Password))
+//            var user = await _userManager.FindByNameAsync(loginModel.UserName);
+//            if (user != null && await _userManager.CheckPasswordAsync(user, loginModel.UserPassword))
 //            {
 //                var userRoles = await _userManager.GetRolesAsync(user);
 
@@ -228,7 +231,7 @@ namespace RopeyDVD.Controllers
 //                {
 //                    UserName = user.UserName,
 //                    Email = user.Email,
-//                    Token = new JwtSecurityTokenHandler().WriteToken((Microsoft.IdentityModel.Tokens.SecurityToken)token),
+//                    Token = new JwtSecurityTokenHandler().WriteToken(token),
 //                    Expiration = token.ValidTo
 //                };
 //                ViewBag.User = userDetails;
@@ -237,147 +240,300 @@ namespace RopeyDVD.Controllers
 //            return RedirectToAction("UnauthorizedAccess");
 //        }
 
-////        private object GetToken(List<Claim> authClaims)
+//        // GET: Authentication/RegisterUser
+//        public IActionResult Register()
+//        {
+//            return View();
+//        }
+
+//        [HttpPost]
+//        [ValidateAntiForgeryToken]
+//        public async Task<IActionResult> Register([FromBody] User model)
+//        {
+//            var userExists = await _userManager.FindByNameAsync(model.UserName);
+//            if (userExists != null)
+//                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User already exists!" });
+
+//            IdentityUser user = new()
+//            {
+//                //UserType = model.UserType,
+//                SecurityStamp = Guid.NewGuid().ToString(),
+//                UserName = model.UserName
+//            };
+//            var result = await _userManager.CreateAsync(user, model.UserPassword);
+//            if (!result.Succeeded)
+//                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User creation failed! Please check user details and try again." });
+//            return RedirectToAction("Index", "Home");
+//        }
+
+//        // GET: Authentication/RegisterAdmin
+//        public IActionResult RegisterAdmin()
+//        {
+//            return View();
+//        }
+
+//        [HttpPost]
+//        [ValidateAntiForgeryToken]
+//        public async Task<IActionResult> RegisterAdmin(User model)
+//        {
+//            var userExists = await _userManager.FindByNameAsync(model.UserName);
+//            if (userExists != null)
+//                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User already exists!" });
+
+//            IdentityUser user = new()
+//            {
+//                //User = model.UserType,
+//                SecurityStamp = Guid.NewGuid().ToString(),
+//                UserName = model.UserName
+//            };
+//            var result = await _userManager.CreateAsync(user, model.UserPassword);
+//            if (!result.Succeeded)
+//                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User creation failed! Please check user details and try again." });
+
+//            if (!await _roleManager.RoleExistsAsync(UserRoles.Admin))
+//                await _roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
+//            if (!await _roleManager.RoleExistsAsync(UserRoles.User))
+//                await _roleManager.CreateAsync(new IdentityRole(UserRoles.User));
+
+//            if (await _roleManager.RoleExistsAsync(UserRoles.Admin))
+//            {
+//                await _userManager.AddToRoleAsync(user, UserRoles.Admin);
+//            }
+//            if (await _roleManager.RoleExistsAsync(UserRoles.Admin))
+//            {
+//                await _userManager.AddToRoleAsync(user, UserRoles.User);
+//            }
+//            return RedirectToAction("Index", "Home");
+
+//        }
+
+//        public IActionResult UnauthorizedAccess()
+//        {
+//            return View();
+//        }
+
+
+//        private JwtSecurityToken GetToken(List<Claim> authClaims)
+//        {
+//            var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
+
+//            var token = new JwtSecurityToken(
+//                issuer: _configuration["JWT:ValidIssuer"],
+//                audience: _configuration["JWT:ValidAudience"],
+//                expires: DateTime.Now.AddHours(3),
+//                claims: authClaims,
+//                signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
+//                );
+
+//            return token;
+//        }
+//    }
+//}
+
+////namespace RopeyDVD.Controllers
+////{
+////    public class AuthController : Controller
+////    {
+////        private readonly UserManager<IdentityUser> _userManager;
+////        private readonly RoleManager<IdentityRole> _roleManager;
+////        private readonly IConfiguration _configuration;
+
+////        public AuthController(
+////            UserManager<IdentityUser> userManager,
+////            RoleManager<IdentityRole> roleManager,
+////            IConfiguration configuration)
 ////        {
-////            throw new NotImplementedException();
+////            _userManager = userManager;
+////            _roleManager = roleManager;
+////            _configuration = configuration;
 ////        }
-
-////        private readonly ApplicationDbContext _context;
-
-////        public AuthController(ApplicationDbContext context)
-////        {
-////            _context = context;
-////        }
-
-////        // GET: Auth
-////        public async Task<IActionResult> Index()
-////        {
-////            return View(await _context.Users.ToListAsync());
-////        }
-
-////        // GET: Auth/Details/5
-////        public async Task<IActionResult> Details(int? id)
-////        {
-////            if (id == null)
-////            {
-////                return NotFound();
-////            }
-
-////            var user = await _context.Users
-////                .FirstOrDefaultAsync(m => m.UserNumber == id);
-////            if (user == null)
-////            {
-////                return NotFound();
-////            }
-
-////            return View(user);
-////        }
-
-////        // GET: Auth/Create
-////        public IActionResult Create()
+////        public IActionResult Index()
 ////        {
 ////            return View();
+////        }
 
+////        // GET: Authentication/Login
+////        public IActionResult Login()
+////        {
+////            return View();
+////        }
 
-////        // POST: Auth/Create
-////        // To protect from overposting attacks, enable the specific properties you want to bind to.
-////        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
 ////        [HttpPost]
 ////        [ValidateAntiForgeryToken]
-////        public async Task<IActionResult> Create([Bind("UserNumber,UserName,UserType,UserPassword")] User user)
+////        public async Task<IActionResult> Login(UserLoginModel loginModel)
 ////        {
-////            if (ModelState.IsValid)
+////            var user = await _userManager.FindByNameAsync(loginModel.Username);
+////            if (user != null && await _userManager.CheckPasswordAsync(user, loginModel.Password))
 ////            {
-////                _context.Add(user);
-////                await _context.SaveChangesAsync();
-////                return RedirectToAction(nameof(Index));
-////            }
-////            return View(user);
-////        }
+////                var userRoles = await _userManager.GetRolesAsync(user);
 
-////        // GET: Auth/Edit/5
-////        public async Task<IActionResult> Edit(int? id)
-////        {
-////            if (id == null)
-////            {
-////                return NotFound();
-////            }
-
-////            var user = await _context.Users.FindAsync(id);
-////            if (user == null)
-////            {
-////                return NotFound();
-////            }
-////            return View(user);
-////        }
-
-////        // POST: Auth/Edit/5
-////        // To protect from overposting attacks, enable the specific properties you want to bind to.
-////        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-////        [HttpPost]
-////        [ValidateAntiForgeryToken]
-////        public async Task<IActionResult> Edit(int id, [Bind("UserNumber,UserName,UserType,UserPassword")] User user)
-////        {
-////            if (id != user.UserNumber)
-////            {
-////                return NotFound();
-////            }
-
-////            if (ModelState.IsValid)
-////            {
-////                try
+////                var authClaims = new List<Claim>
 ////                {
-////                    _context.Update(user);
-////                    await _context.SaveChangesAsync();
-////                }
-////                catch (DbUpdateConcurrencyException)
+////                    new Claim(ClaimTypes.Name, user.UserName),
+////                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+////                };
+
+////                foreach (var userRole in userRoles)
 ////                {
-////                    if (!UserExists(user.UserNumber))
-////                    {
-////                        return NotFound();
-////                    }
-////                    else
-////                    {
-////                        throw;
-////                    }
+////                    authClaims.Add(new Claim(ClaimTypes.Role, userRole));
 ////                }
-////                return RedirectToAction(nameof(Index));
+
+////                var token = GetToken(authClaims);
+
+////                UserDetailsViewModel userDetails = new UserDetailsViewModel()
+////                {
+////                    UserName = user.UserName,
+////                    Email = user.Email,
+////                    Token = new JwtSecurityTokenHandler().WriteToken((Microsoft.IdentityModel.Tokens.SecurityToken)token),
+////                    Expiration = token.ValidTo
+////                };
+////                ViewBag.User = userDetails;
+////                return RedirectToAction("UserDetails", ViewBag.User);
 ////            }
-////            return View(user);
+////            return RedirectToAction("UnauthorizedAccess");
 ////        }
 
-////        // GET: Auth/Delete/5
-////        public async Task<IActionResult> Delete(int? id)
-////        {
-////            if (id == null)
-////            {
-////                return NotFound();
-////            }
+//////        private object GetToken(List<Claim> authClaims)
+//////        {
+//////            throw new NotImplementedException();
+//////        }
 
-////            var user = await _context.Users
-////                .FirstOrDefaultAsync(m => m.UserNumber == id);
-////            if (user == null)
-////            {
-////                return NotFound();
-////            }
+//////        private readonly ApplicationDbContext _context;
 
-////            return View(user);
-////        }
+//////        public AuthController(ApplicationDbContext context)
+//////        {
+//////            _context = context;
+//////        }
 
-////        // POST: Auth/Delete/5
-////        [HttpPost, ActionName("Delete")]
-////        [ValidateAntiForgeryToken]
-////        public async Task<IActionResult> DeleteConfirmed(int id)
-////        {
-////            var user = await _context.Users.FindAsync(id);
-////            _context.Users.Remove(user);
-////            await _context.SaveChangesAsync();
-////            return RedirectToAction(nameof(Index));
-////        }
+//////        // GET: Auth
+//////        public async Task<IActionResult> Index()
+//////        {
+//////            return View(await _context.Users.ToListAsync());
+//////        }
 
-////        private bool UserExists(int id)
-////        {
-////            return _context.Users.Any(e => e.UserNumber == id);
-////        }
-////    }
-////}
+//////        // GET: Auth/Details/5
+//////        public async Task<IActionResult> Details(int? id)
+//////        {
+//////            if (id == null)
+//////            {
+//////                return NotFound();
+//////            }
+
+//////            var user = await _context.Users
+//////                .FirstOrDefaultAsync(m => m.UserNumber == id);
+//////            if (user == null)
+//////            {
+//////                return NotFound();
+//////            }
+
+//////            return View(user);
+//////        }
+
+//////        // GET: Auth/Create
+//////        public IActionResult Create()
+//////        {
+//////            return View();
+
+
+//////        // POST: Auth/Create
+//////        // To protect from overposting attacks, enable the specific properties you want to bind to.
+//////        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+//////        [HttpPost]
+//////        [ValidateAntiForgeryToken]
+//////        public async Task<IActionResult> Create([Bind("UserNumber,UserName,UserType,UserPassword")] User user)
+//////        {
+//////            if (ModelState.IsValid)
+//////            {
+//////                _context.Add(user);
+//////                await _context.SaveChangesAsync();
+//////                return RedirectToAction(nameof(Index));
+//////            }
+//////            return View(user);
+//////        }
+
+//////        // GET: Auth/Edit/5
+//////        public async Task<IActionResult> Edit(int? id)
+//////        {
+//////            if (id == null)
+//////            {
+//////                return NotFound();
+//////            }
+
+//////            var user = await _context.Users.FindAsync(id);
+//////            if (user == null)
+//////            {
+//////                return NotFound();
+//////            }
+//////            return View(user);
+//////        }
+
+//////        // POST: Auth/Edit/5
+//////        // To protect from overposting attacks, enable the specific properties you want to bind to.
+//////        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+//////        [HttpPost]
+//////        [ValidateAntiForgeryToken]
+//////        public async Task<IActionResult> Edit(int id, [Bind("UserNumber,UserName,UserType,UserPassword")] User user)
+//////        {
+//////            if (id != user.UserNumber)
+//////            {
+//////                return NotFound();
+//////            }
+
+//////            if (ModelState.IsValid)
+//////            {
+//////                try
+//////                {
+//////                    _context.Update(user);
+//////                    await _context.SaveChangesAsync();
+//////                }
+//////                catch (DbUpdateConcurrencyException)
+//////                {
+//////                    if (!UserExists(user.UserNumber))
+//////                    {
+//////                        return NotFound();
+//////                    }
+//////                    else
+//////                    {
+//////                        throw;
+//////                    }
+//////                }
+//////                return RedirectToAction(nameof(Index));
+//////            }
+//////            return View(user);
+//////        }
+
+//////        // GET: Auth/Delete/5
+//////        public async Task<IActionResult> Delete(int? id)
+//////        {
+//////            if (id == null)
+//////            {
+//////                return NotFound();
+//////            }
+
+//////            var user = await _context.Users
+//////                .FirstOrDefaultAsync(m => m.UserNumber == id);
+//////            if (user == null)
+//////            {
+//////                return NotFound();
+//////            }
+
+//////            return View(user);
+//////        }
+
+//////        // POST: Auth/Delete/5
+//////        [HttpPost, ActionName("Delete")]
+//////        [ValidateAntiForgeryToken]
+//////        public async Task<IActionResult> DeleteConfirmed(int id)
+//////        {
+//////            var user = await _context.Users.FindAsync(id);
+//////            _context.Users.Remove(user);
+//////            await _context.SaveChangesAsync();
+//////            return RedirectToAction(nameof(Index));
+//////        }
+
+//////        private bool UserExists(int id)
+//////        {
+//////            return _context.Users.Any(e => e.UserNumber == id);
+//////        }
+//////    }
+//////}
