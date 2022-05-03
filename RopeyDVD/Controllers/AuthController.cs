@@ -95,14 +95,14 @@ namespace RopeyDVD.Controllers
         }
 
         // GET: Authentication/RegisterUser
-        public IActionResult Register()
+        public IActionResult RegisterUser()
         {
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register( UserRegister model)
+        public async Task<IActionResult> RegisterUser( UserRegister model)
         {
             var userExists = await _userManager.FindByNameAsync(model.UserName);
             if (userExists != null)
