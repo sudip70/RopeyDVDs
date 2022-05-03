@@ -102,7 +102,7 @@ namespace RopeyDVD.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register([FromBody] UserRegister model)
+        public async Task<IActionResult> Register( UserRegister model)
         {
             var userExists = await _userManager.FindByNameAsync(model.UserName);
             if (userExists != null)
@@ -110,7 +110,7 @@ namespace RopeyDVD.Controllers
 
             IdentityUser user = new()
             {
-                //UserType = model.UserType,
+                Email = model.Email,
                 SecurityStamp = Guid.NewGuid().ToString(),
                 UserName = model.UserName
             };
@@ -136,7 +136,7 @@ namespace RopeyDVD.Controllers
 
             IdentityUser user = new()
             {
-                //User = model.UserType,
+                Email = model.Email,
                 SecurityStamp = Guid.NewGuid().ToString(),
                 UserName = model.UserName
             };
