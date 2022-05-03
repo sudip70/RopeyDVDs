@@ -22,6 +22,7 @@ namespace RopeyDVD.Data
         public DbSet<DVDCopy>? DVDCopies { get; set; }
         public DbSet<Loan>? Loans { get; set; }
         public DbSet<CastMember>? CastMembers { get; set; }
+        public DbSet<UserLoginModel>? UserLoginModels { get; set; }
 
     }
 }
