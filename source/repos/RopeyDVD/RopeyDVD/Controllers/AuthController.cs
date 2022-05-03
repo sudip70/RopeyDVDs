@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +14,11 @@ namespace RopeyDVD.Controllers
 {
     public class AuthController : Controller
     {
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly RoleManager<IdentityRole> roleManager;
+        private readonly IConfiguration _configuration;
+
+
         private readonly ApplicationDbContext _context;
 
         public AuthController(ApplicationDbContext context)
@@ -48,7 +54,7 @@ namespace RopeyDVD.Controllers
         public IActionResult Create()
         {
             return View();
-        }
+       
 
         // POST: Auth/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
