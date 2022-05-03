@@ -8,65 +8,65 @@ build_property.PlatformNeutralAssembly =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = RopeyDVD
 build_property.RootNamespace = RopeyDVD
-build_property.ProjectDir = C:\Users\acer\source\repos\RopeyDVD\RopeyDVD\
+build_property.ProjectDir = D:\krity\year 3\app dev\ropey\source\repos\RopeyDVD\RopeyDVD\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\acer\source\repos\RopeyDVD\RopeyDVD
+build_property.MSBuildProjectDirectory = D:\krity\year 3\app dev\ropey\source\repos\RopeyDVD\RopeyDVD
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/acer/source/repos/RopeyDVD/RopeyDVD/Views/Auth/Create.cshtml]
+[D:/krity/year 3/app dev/ropey/source/repos/RopeyDVD/RopeyDVD/Views/Auth/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aFxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/acer/source/repos/RopeyDVD/RopeyDVD/Views/Auth/Delete.cshtml]
+[D:/krity/year 3/app dev/ropey/source/repos/RopeyDVD/RopeyDVD/Views/Auth/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aFxEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/acer/source/repos/RopeyDVD/RopeyDVD/Views/Auth/Details.cshtml]
+[D:/krity/year 3/app dev/ropey/source/repos/RopeyDVD/RopeyDVD/Views/Auth/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aFxEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/acer/source/repos/RopeyDVD/RopeyDVD/Views/Auth/Edit.cshtml]
+[D:/krity/year 3/app dev/ropey/source/repos/RopeyDVD/RopeyDVD/Views/Auth/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aFxFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/acer/source/repos/RopeyDVD/RopeyDVD/Views/Auth/Index.cshtml]
+[D:/krity/year 3/app dev/ropey/source/repos/RopeyDVD/RopeyDVD/Views/Auth/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/acer/source/repos/RopeyDVD/RopeyDVD/Views/Auth/LoginUser.cshtml]
+[D:/krity/year 3/app dev/ropey/source/repos/RopeyDVD/RopeyDVD/Views/Auth/LoginUser.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aFxMb2dpblVzZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/acer/source/repos/RopeyDVD/RopeyDVD/Views/Auth/RegisterUser.cshtml]
+[D:/krity/year 3/app dev/ropey/source/repos/RopeyDVD/RopeyDVD/Views/Auth/RegisterUser.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aFxSZWdpc3RlclVzZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/acer/source/repos/RopeyDVD/RopeyDVD/Views/Home/Index.cshtml]
+[D:/krity/year 3/app dev/ropey/source/repos/RopeyDVD/RopeyDVD/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/acer/source/repos/RopeyDVD/RopeyDVD/Views/Home/Privacy.cshtml]
+[D:/krity/year 3/app dev/ropey/source/repos/RopeyDVD/RopeyDVD/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/acer/source/repos/RopeyDVD/RopeyDVD/Views/Shared/Error.cshtml]
+[D:/krity/year 3/app dev/ropey/source/repos/RopeyDVD/RopeyDVD/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/acer/source/repos/RopeyDVD/RopeyDVD/Views/Shared/_ValidationScriptsPartial.cshtml]
+[D:/krity/year 3/app dev/ropey/source/repos/RopeyDVD/RopeyDVD/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/acer/source/repos/RopeyDVD/RopeyDVD/Views/_ViewImports.cshtml]
+[D:/krity/year 3/app dev/ropey/source/repos/RopeyDVD/RopeyDVD/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/acer/source/repos/RopeyDVD/RopeyDVD/Views/_ViewStart.cshtml]
+[D:/krity/year 3/app dev/ropey/source/repos/RopeyDVD/RopeyDVD/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/acer/source/repos/RopeyDVD/RopeyDVD/Views/Shared/_Layout.cshtml]
+[D:/krity/year 3/app dev/ropey/source/repos/RopeyDVD/RopeyDVD/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-la23zskyrt
