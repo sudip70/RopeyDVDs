@@ -1,0 +1,33 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+nav {
+    background-color: #AB7E5D !important;
+}
+.nav-logo {
+  width: 120px;
+}
+
+.logo {
+    filter: saturate(0.7) grayscale(0.5);
+}
+
+body {
+    background-color: #ab7e5d1c;
+}
