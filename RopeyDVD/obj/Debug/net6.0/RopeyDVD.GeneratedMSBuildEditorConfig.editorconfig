@@ -139,12 +139,32 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRFZEVGl0bGVzXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/acer/source/repos/RopeyDVD/RopeyDVD/Views/DVDTitles/DVDDetailsIndex.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRFZEVGl0bGVzXERWRERldGFpbHNJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/acer/source/repos/RopeyDVD/RopeyDVD/Views/DVDTitles/DVDsNotLoaned.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRFZEVGl0bGVzXERWRHNOb3RMb2FuZWQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/acer/source/repos/RopeyDVD/RopeyDVD/Views/DVDTitles/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRFZEVGl0bGVzXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/acer/source/repos/RopeyDVD/RopeyDVD/Views/DVDTitles/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRFZEVGl0bGVzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/acer/source/repos/RopeyDVD/RopeyDVD/Views/DVDTitles/SelectActors.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRFZEVGl0bGVzXFNlbGVjdEFjdG9ycy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/acer/source/repos/RopeyDVD/RopeyDVD/Views/DVDTitles/ShowDVDCopiesofActors.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRFZEVGl0bGVzXFNob3dEVkRDb3BpZXNvZkFjdG9ycy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/acer/source/repos/RopeyDVD/RopeyDVD/Views/DVDTitles/ShowDVDsofActors.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRFZEVGl0bGVzXFNob3dEVkRzb2ZBY3RvcnMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/acer/source/repos/RopeyDVD/RopeyDVD/Views/Home/Index.cshtml]

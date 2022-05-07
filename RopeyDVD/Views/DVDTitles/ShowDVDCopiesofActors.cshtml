@@ -1,0 +1,37 @@
+﻿@{
+    ViewData["Title"] = "ShowDVDCopiesofActors";
+}
+<h1>DVD Copies of Actors</h1>
+
+@if(ViewBag.NoData != null)
+{
+    <h3>@ViewBag.NoData</h3>
+}
+else
+{
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Actors</th>
+                <th>Number of DVD Copies Available on Shelves</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Title</td>
+                    <td>@foreach(var value in item.Cast)
+                        {
+                            <p>@value</p>
+                        }
+                    </td>
+                    <td>
+                        @item.NumberOfCopies
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
