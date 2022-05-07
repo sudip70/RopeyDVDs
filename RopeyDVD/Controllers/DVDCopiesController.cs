@@ -41,7 +41,6 @@ namespace RopeyDVD.Controllers
             {
                 return NotFound();
             }
-
             var latestLoan = from loan in _context.Loans
                              join Member in _context.Members on loan.MemberNumber equals Member.MemberNumber
                              where loan.CopyNumber == id
