@@ -359,7 +359,7 @@ namespace RopeyDVD.Migrations
                     b.Property<DateTime>("DateOut")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DateReturned")
+                    b.Property<DateTime?>("DateReturned")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("LoanTypeNumber")
@@ -409,11 +409,12 @@ namespace RopeyDVD.Migrations
                     b.Property<string>("MemberAddress")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("MemberBirthOfDate")
+
+                    b.Property<DateTime>("MemberDOB")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("MemberFirstName")
-                        .HasColumnType("int");
+                    b.Property<string>("MemberFirstName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MemberLastName")
                         .HasColumnType("nvarchar(max)");

@@ -34,7 +34,6 @@ namespace RopeyDVD.Controllers
             {
                 return NotFound();
             }
-
             var dVDCopy = await _context.DVDCopies
                 .Include(d => d.DVDTitle)
                 .FirstOrDefaultAsync(m => m.CopyNumber == id);
@@ -43,6 +42,21 @@ namespace RopeyDVD.Controllers
                 return NotFound();
             }
 
+            var latestLoan = from loan in _context.Loans
+                             join Member in _context.Members on loan.MemberNumber equals Member.MemberNumber
+                             where loan.CopyNumber == id
+                             orderby loan.DateOut descending
+                             select new
+                             {
+                                 MemberName = Member.MemberFirstName + " " + Member.MemberLastName,
+                                 Loan = loan
+                             };
+            var data = latestLoan.FirstOrDefault();
+            if (data == null)
+            {
+                ViewData["loanData"] = data.Loan;
+                ViewData["lastLoanMemberName"] = data.MemberName;
+            }
             return View(dVDCopy);
         }
 

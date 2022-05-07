@@ -7,9 +7,9 @@ namespace RopeyDVD.Models
         [Key]
         public int MemberNumber { get; set; }
         public string? MemberLastName { get; set; }
-        public int MemberFirstName { get; set; }
+        public String? MemberFirstName { get; set; }
         public string? MemberAddress { get; set; }
-        public DateTime MemberBirthOfDate { get; set; }
+        public DateTime MemberDOB { get; set; }
         public MembershipCategory? MembershipCategory { get; set; }
     }
 }

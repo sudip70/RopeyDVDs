@@ -1,0 +1,35 @@
+﻿@*@model IEnumerable<RopeyDVD.Models.DVDTitle>*@
+@{
+    ViewData["Title"] = "DVDDetailsIndex";
+}
+<h1>DVD Details</h1>
+<table class="table">
+    <thead>
+        <tr>
+        <th>Title</th>
+        <th>Category</th>
+        <th>Studio</th>
+        <th>Producer</th>
+        <th>Cast</th>
+        <th>Realeased Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Title</td>
+                <td>@item.Category</td>
+                <td>@item.Studio</td>
+                <td>@item.Producer</td>
+                <td>@foreach(var value in item.Cast)
+                    {
+                        <p>@value</p>
+                    }
+                </td>
+                <td>@item.Release</td>
+
+            </tr>
+        }
+    </tbody>
+</table>
