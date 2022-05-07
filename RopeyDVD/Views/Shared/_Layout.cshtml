@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>@ViewData["Title"] - RopeyDVD</title>
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/nav.css" asp-append-version="true" />
+        @*<link rel="stylesheet" href="~/css/auth.css" asp-append-version="true" />*@
+        <link rel="stylesheet" href="~/RopeyDVD.styles.css" asp-append-version="true" />
+    </head>
+    <body>
+        <header>
+            <!-- The overlay -->
+            <div id="myNav" class="overlay">
+
+              <!-- Button to close the overlay navigation -->
+              <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+              <!-- Overlay content -->
+              <div class="overlay-content">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Login">Login</a>
+                <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="RegisterUser">Register User</a>
+                <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="RegisterAdmin">Register Admin</a>
+
+              </div>
+
+            </div>
+           <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3">
+                <!-- open/show the overlay navigation menu -->
+                <div class="menu" onclick="openNav()">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
+        
+                <a  asp-controller="Home" asp-action="Index" class="text-center col-10">
+                    <img src="@Url.Content("~/imgs/nobg/ropey.png")" alt="logo" class="nav-logo logo" />
+                </a>
+                <div class="row">
+                    <a class="btn btn-secondary col-3"
+                    asp-area="" asp-controller="Auth" asp-action="Login"
+                    >Logout</a>
+                </div>
+            </nav>
+
+        </header>
+        <div class="container">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+
+        <footer class="border-top footer text-muted">
+            <div class="container">
+                &copy; 2022 - RopeyDVD
+            </div>
+        </footer>
+
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        <script>
+            function openNav() {
+              document.getElementById("myNav").style.height = "100%";
+            }
+
+            function closeNav() {
+              document.getElementById("myNav").style.height = "0%";
+            }   
+        </script>
+        @await RenderSectionAsync("Scripts", required: false)
+    </body>
+</html>

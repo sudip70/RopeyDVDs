@@ -1,0 +1,35 @@
+﻿.brand {
+    position: absolute;
+    z-index: 3;
+    padding: 20% 44px 30px 30px;
+    background-color: #90694624;
+    border-radius: 12px;
+    width: 51%;
+    height: 100%;
+}
+
+.brand-white {
+    position: absolute;
+    top: 25%;
+    left: 20%;
+    padding: 30px;
+    background-color: #ffffffa8;
+    border-radius: 12px;
+    width: 260px;
+}
+
+.card-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 12px 0px 0px 12px;
+    object-fit: cover;
+    filter: saturate(0.6) blur(1.6px) opacity(0.8);
+}
+
+.brand-img{
+    height: 100px;
+}
+
+.card-auth{
+    margin-top: 88px;
+}

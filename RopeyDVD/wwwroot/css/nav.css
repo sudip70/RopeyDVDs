@@ -1,0 +1,117 @@
+﻿/*for bar*/
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans:300');
+
+
+.menu {
+    display: inline-block;
+    width: 44px;
+    transform: translate(-50%, -50%);
+    font-size: 37px;
+    font-family: 'Josefin Sans', sans-serif;
+    color: #906946;
+    cursor: pointer;
+    margin-left: 80px;
+    margin-top: 44px;
+}
+
+    .menu::before,
+    .menu::after {
+        position: absolute;
+        transition: 0.4s ease;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .menu:before {
+        content: "M \00a0 \00a0 \00a0 \00a0 \00a0U";
+        top: -60px;
+        left: -70%;
+        width: 215px;
+    }
+
+    .menu:after {
+        content: "N";
+        top: 50px;
+        left: 90%;
+    }
+
+    .menu:hover::before,
+    .menu:hover::after {
+        top: -4.3px;
+        opacity: 1;
+        transition: 0.2s ease, opacity 0.17s 0.03s ease-in;
+    }
+
+.bar {
+    width: 63%;
+    height: 2px;
+    background: #906946;
+    margin: 7px auto 10px;
+    transition: transform 0.4s ease;
+}
+
+
+/*for overlay*/
+.overlay {
+    height: 0%;
+    width: 100%;
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    background-color: #f7f6f4f2;
+    overflow-y: hidden;
+    transition: 0.5s;
+}
+
+.overlay-content {
+    position: relative;
+    top: 25%;
+    width: 100%;
+    text-align: center;
+    /*margin-top: 30px;*/
+}
+
+.overlay a {
+    padding: 8px;
+    text-decoration: none;
+    font-size: 36px;
+    color: #906946 !important;
+    display: block;
+    transition: 0.3s;
+}
+
+    .overlay a:hover, .overlay a:focus {
+        color: #f1f1f1;
+    }
+
+.overlay .closebtn {
+    position: absolute;
+    top: -23px;
+    left: 48px;
+    font-size: 75px;
+    font-weight: 100;
+}
+
+@media screen and (max-height: 450px) {
+    .overlay {
+        overflow-y: auto;
+    }
+
+        .overlay a {
+            font-size: 20px
+        }
+
+        .overlay .closebtn {
+            font-size: 40px;
+            top: 15px;
+            right: 35px;
+        }
+}
+
+/*nav {
+    background-color: #c0a08a;
+}*/
+.nav-logo {
+    width: 140px;
+}
