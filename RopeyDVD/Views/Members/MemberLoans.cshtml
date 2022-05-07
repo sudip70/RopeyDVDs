@@ -1,0 +1,51 @@
+﻿@*@model IEnumerable<RopeyDVD.Models.Members>*@
+@{
+    ViewData["Title"] = "MemberLoans";
+}
+@if(ViewBag.NoData != null)
+{
+    <h3>@ViewBag.NoData</h3>
+}
+else
+{
+    <table class="table">
+    <thead>
+        <tr>
+            <th>
+                MemberNumber
+            </th>
+            <th>
+               DVD Number
+            </th>
+            <th>
+               Title 
+            </th>
+            <th>
+                DVD Returned?
+            </th>
+            <th>
+                Copy Number
+            </th>
+        </tr>
+    </thead>
+        <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+            <td>@item.MemberNumber</td>
+            <td>@item.DVDNumber</td>
+            <td>@item.Title</td>
+            <td>@if (item.dateReturned == null)
+                    {
+                        @Html.Encode("No")
+                    }
+                    else {
+                        @Html.Encode("Yes")
+                    }</td>
+            <td>@item.CopyNumber</td>
+            </tr>
+        }
+    </tbody>
+    </table>
+
+}

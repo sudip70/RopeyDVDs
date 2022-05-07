@@ -185,7 +185,7 @@ namespace RopeyDVD.Controllers
                                   join actors in _context.Actors on casts.ActorNumber equals actors.ActorNumber
                                   group actors by new { casts.DVDNumber } into g
                                   select
-                                    string.Join(",", g.OrderBy(c => c.ActorSurName).Select(x => (x.ActorFirstName + "" + x.ActorFirstName))),
+                                    string.Join(" , ", g.OrderBy(c => c.ActorSurName).Select(x => (x.ActorFirstName + " " + x.ActorSurName))),
                            Release = DVDTitle.DateReleased.ToString("dd MM yyyy"),
                        };
             data.OrderBy(c => c.Cast);
@@ -211,7 +211,7 @@ namespace RopeyDVD.Controllers
                                   join Actor in _context.Actors on casts.ActorNumber equals Actor.ActorNumber
                                   group Actor by new { casts.DVDNumber } into g
                                   select
-                                    String.Join(",", g.OrderBy(c => c.ActorNumber).Select(x => (x.ActorFirstName + "" + x.ActorSurName))),
+                                    String.Join(" , ", g.OrderBy(c => c.ActorNumber).Select(x => (x.ActorFirstName + "" + x.ActorSurName))),
 
                        };
             return View(data);

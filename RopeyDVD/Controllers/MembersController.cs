@@ -152,5 +152,43 @@ namespace RopeyDVD.Controllers
         {
             return _context.Members.Any(e => e.MemberNumber == id);
         }
+        public async Task<IActionResult> SelectMember(Member members)
+        {
+            ViewData["MemberFirstName"] = new SelectList(_context.Set<Member>(), "MemberFirstName", "MemberFirstName", members.MemberFirstName);
+            return View();
+        }
+        public async Task<IActionResult> MemberLoans()
+        {
+            string memberName = Request.Form["memberList"].ToString();
+            var data = (from Member in _context.Members
+                          join Loan in _context.Loans on Member.MemberNumber equals Loan.LoanNumber
+                          join copy in _context.DVDCopies on Loan.LoanNumber equals copy.CopyNumber
+                          join title in _context.DVDTitles on copy.CopyNumber equals title.DVDNumber
+                          select new
+                          {
+                              MemberNumber = Member.MemberNumber,
+                              DVDNumber = title.DVDNumber,
+                              Title = title.DVDTitles,
+                              dateReturned = Loan.DateOut <= DateTime.Now.AddDays(31),
+                              CopyNumber = copy.CopyNumber
+                              
+                          });
+
+            //var results = _context.Members.Include(m => m.Loan)
+            //    .ThenInclude(l => l.DVDCopy)
+            //    .ThenInclude(c => c.DVDTitle)
+            //    .Where(m => m.Loan.All(l => l.DateOut <= DateTime.Now.AddDays(31)))
+            //    .Where(m => m.MemberFirstName.Contains(searchString)).FirstOrDefault();
+            //ViewData["member"] = results;
+            //if(results == null)
+            //{
+            //    ViewData["loans"] = new List<Loan>();
+            //}
+            //else
+            //{
+            //    ViewData["loans"] = results.Loan;
+            //}
+            return View(data);
+        }
     }
 }

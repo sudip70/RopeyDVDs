@@ -409,7 +409,6 @@ namespace RopeyDVD.Migrations
                     b.Property<string>("MemberAddress")
                         .HasColumnType("nvarchar(max)");
 
-
                     b.Property<DateTime>("MemberDOB")
                         .HasColumnType("datetime2");
 
@@ -628,7 +627,7 @@ namespace RopeyDVD.Migrations
                         .IsRequired();
 
                     b.HasOne("RopeyDVD.Models.Member", "Member")
-                        .WithMany()
+                        .WithMany("Loan")
                         .HasForeignKey("MemberNumber")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -672,6 +671,11 @@ namespace RopeyDVD.Migrations
                 });
 
             modelBuilder.Entity("RopeyDVD.Models.LoanType", b =>
+                {
+                    b.Navigation("Loan");
+                });
+
+            modelBuilder.Entity("RopeyDVD.Models.Member", b =>
                 {
                     b.Navigation("Loan");
                 });

@@ -170,5 +170,103 @@ namespace RopeyDVD.Controllers
         {
             return _context.DVDCopies.Any(e => e.CopyNumber == id);
         }
+        public async Task<IActionResult> SelectDate(Member members)
+        {
+            //ViewData["SelectedDate"] = new SelectList(_context.Set<Member>(), "MemberFirstName", "MemberFirstName", members.MemberFirstName);
+            return View();
+        }
+
+        public async Task<IActionResult> OlderCopiesDVD()
+        {
+            var loanedCopiesDVD = (from loan in _context.Loans
+                                 where loan.DateReturned == null
+                                 select loan.CopyNumber).Distinct();
+            var notloanedCopiesDVD = (from copy in _context.DVDCopies
+                                    join DVDTitle in _context.DVDTitles on copy.DVDNumber equals DVDTitle.DVDNumber
+                                    where !(loanedCopiesDVD).Contains(copy.CopyNumber)
+                                    select new
+                                    {
+                                        Copy = copy.CopyNumber,
+                                        DVDTitle = DVDTitle.DVDTitles,
+                                        DatePurchased = copy.DatePurchased
+                                    }
+                                    );
+            return View(await notloanedCopiesDVD.ToListAsync());
+        }
+
+        public async Task<IActionResult> RemovedOldCopies()
+        {
+            var loanedCopiesDVD = (from loan in _context.Loans
+                                   where loan.DateReturned == null
+                                   select loan.CopyNumber).Distinct();
+            var notloanedCopiesDVD = (from copy in _context.DVDCopies
+                                      join DVDTitle in _context.DVDTitles on copy.DVDNumber equals DVDTitle.DVDNumber
+                                      where !(loanedCopiesDVD).Contains(copy.CopyNumber)
+                                      select new
+                                      {
+                                          Copy = copy.CopyNumber,
+                                          DVDTitle = DVDTitle.DVDTitles,
+                                          DatePurchased = copy.DatePurchased
+                                      }
+                                   );
+            foreach(var copy in notloanedCopiesDVD.ToList())
+            {
+                if(DateTime.Now.Subtract(copy.DatePurchased).Days > 365)
+                {
+                    var remove = (from removeCopy in _context.DVDCopies
+                                  where removeCopy.CopyNumber == copy.Copy
+                                  select removeCopy).FirstOrDefault();
+                    _context.DVDCopies.Remove(remove);
+                }
+            }
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+
+        }
+        public async Task<IActionResult> LoanedOutDVDCopies()
+        {
+
+            if(Request.Form.Count() == 2 )
+            {
+                ViewData["SelectedDate"] = Request.Form["SearchDate"].ToString();
+                DateTime searchingDate = DateTime.Parse(Request.Form["SearchDate"].ToString());
+                var loanedOut = from loan in _context.Loans
+                                join copy in _context.DVDCopies on loan.CopyNumber equals copy.CopyNumber
+                                join DVDTitle in _context.DVDTitles on copy.DVDNumber equals DVDTitle.DVDNumber
+                                join member in _context.Members on loan.MemberNumber equals member.MemberNumber
+                                orderby loan.DateOut
+                                where loan.DateOut.Date == searchingDate.Date
+                                select new
+                                 {
+                                    Loan = loan.LoanNumber,
+                                    DVDTitle = DVDTitle.DVDTitles,
+                                    Copy = copy.CopyNumber,
+                                    Member = member.MemberFirstName + " " + member.MemberLastName,
+                                    DateOut = loan.DateOut
+                                  };
+                ViewData["TotalLoans"] = loanedOut.ToList().Count();
+                return View( await loanedOut.ToListAsync());
+            }
+            else
+            {
+                ViewData["SelectedDate"] = DateTime.Today.ToString("yyyy-MM-dd");
+                var loanedOut = from loan in _context.Loans
+                                join copy in _context.DVDCopies on loan.CopyNumber equals copy.CopyNumber
+                                join DVDTitle in _context.DVDTitles on copy.DVDNumber equals DVDTitle.DVDNumber
+                                join member in _context.Members on loan.MemberNumber equals member.MemberNumber
+                                orderby loan.DateOut
+                                where loan.DateOut.Date == DateTime.Today.Date
+                                select new
+                                {
+                                    Loan = loan.LoanNumber,
+                                    DVDTitle = DVDTitle.DVDTitles,
+                                    Copy = copy.CopyNumber,
+                                    Member = member.MemberFirstName + " " + member.MemberLastName,
+                                    DateOut = loan.DateOut
+                                };
+                ViewData["TotalLoans"] = loanedOut.ToList().Count();
+                return View(await loanedOut.ToListAsync());
+            }
+        }
     }
 }
