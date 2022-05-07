@@ -179,7 +179,7 @@ namespace RopeyDVD.Controllers
                        {
                            Title = DVDTitle.DVDTitles,
                            Category = DVDCategory.CategoryDescription,
-                           StudioNumber = Studio.StudioName,
+                           Studio = Studio.StudioName,
                            Producer = DVDTitle.Producer.ProducerName,
                            Cast = from casts in DVDTitle.CastMember
                                   join actors in _context.Actors on casts.ActorNumber equals actors.ActorNumber
@@ -193,7 +193,7 @@ namespace RopeyDVD.Controllers
         }
         public async Task<IActionResult> SelectActors(Actor actors)
         {
-            ViewData["ActorSurname"] = new SelectList(_context.Set<Actor>(), "ActorSurname", "ActorSurname", actors.ActorSurName);
+            ViewData["ActorSurName"] = new SelectList(_context.Set<Actor>(), "ActorSurName", "ActorSurName", actors.ActorSurName);
             return View();
         }
         public async Task<IActionResult> ShowDVDsofActors()
