@@ -1,5 +1,4 @@
 ﻿@model RopeyDVD.Models.DVDCopy
-
 @{
     ViewData["Title"] = "Details";
 }
@@ -32,31 +31,31 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.DatePurchased)
         </dd>
-        @if (ViewBag.MemberName != null)
+        @if (ViewBag.lastLoanMemberName != null)
         {
             <dt class = "col-sm-2">
             Last Loaned By
         </dt>
         <dd class = "col-sm-10">
-            @ViewBag.MemberName
+            @ViewBag.lastLoanMemberName
         </dd>
         <dt class = "col-sm-2">
             Loaned On
         </dt>
         <dd class = "col-sm-10">
-            @ViewBag.loan.DateOut
+            @ViewBag.loanData.DateOut
         </dd>
         <dt class = "col-sm-2">
             Loan Due On 
         </dt>
         <dd class = "col-sm-10">
-            @ViewBag.loan.DateDue
+            @ViewBag.loanData.DateDue
         </dd>
         <dt class = "col-sm-2">
             Returned On
         </dt>
         <dd class = "col-sm-10">
-            @(ViewBag.loan.DateReturned ?? "Not Returned Yet")
+            @(ViewBag.loanData.DateReturned ?? "Not Returned Yet")
         </dd>
         }
     </dl>
