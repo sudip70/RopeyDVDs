@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="~/css/nav.css" asp-append-version="true" />
         @*<link rel="stylesheet" href="~/css/auth.css" asp-append-version="true" />*@
         <link rel="stylesheet" href="~/RopeyDVD.styles.css" asp-append-version="true" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amatic SC">
     </head>
     <body>
         <header>
@@ -21,30 +22,44 @@
               <!-- Overlay content -->
               <div class="overlay-content">
                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                 <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Login">Login</a>
-                <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="RegisterUser">Register User</a>
+                <a class="nav-link text-dark" asp-area="" asp-controller="DVDTitles" asp-action="SelectActors">Search Actors DVDs</a>
                 <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="RegisterAdmin">Register Admin</a>
 
               </div>
 
             </div>
            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3">
-                <!-- open/show the overlay navigation menu -->
-                <div class="menu" onclick="openNav()">
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                </div>
+               <div class="container-fluid">
+                   <div class="row mx-auto">
+                        <!-- open/show the overlay navigation menu -->
+                        <div class="col-md-1 col-4">
+                            <div class="menu" onclick="openNav()">
+                                <div class="bar"></div>
+                                <div class="bar"></div>
+                                <div class="bar"></div>
+                            </div>
+                        </div>
         
-                <a  asp-controller="Home" asp-action="Index" class="text-center col-10">
-                    <img src="@Url.Content("~/imgs/nobg/ropey.png")" alt="logo" class="nav-logo logo" />
-                </a>
-                <div class="row">
-                    <a class="btn btn-secondary col-3"
-                    asp-area="" asp-controller="Auth" asp-action="Login"
-                    >Logout</a>
-                </div>
+                        <a  asp-controller="Home" asp-action="Index" class="text-center col-md-10 col-8">
+                            <img src="@Url.Content("~/imgs/nobg/ropey.png")" alt="logo" class="nav-logo logo" />
+                        </a>
+                        <div class="col-md-1 col-12 my-auto">
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <a class="btn btn-secondary" asp-area="" asp-controller="Auth" asp-action="Login" >
+                                    Login
+                                </a>
+                            }
+                            @if (!User.Identity.IsAuthenticated)
+                            {
+                                <a class="btn btn-secondary" asp-area="" asp-controller="Home" asp-action="Index" >
+                                    Logout
+                                </a>
+                            }
+                        </div>
+                   </div>
+               </div>
             </nav>
 
         </header>
@@ -54,11 +69,11 @@
             </main>
         </div>
 
-        <footer class="border-top footer text-muted">
+        @*<footer class="border-top footer text-muted">
             <div class="container">
                 &copy; 2022 - RopeyDVD
             </div>
-        </footer>
+        </footer>*@
 
         <script src="~/lib/jquery/dist/jquery.min.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

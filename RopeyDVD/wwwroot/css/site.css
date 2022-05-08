@@ -8,7 +8,6 @@ html {
   }
 }
 
-<<<<<<< HEAD
 /*
     colours:
     dark brown: #906946
@@ -22,7 +21,6 @@ html {
 }
 
 body {
-<<<<<<< HEAD
     background-color: #f7f6f4;
     margin-bottom: 60px;
 }
@@ -74,21 +72,12 @@ a {
     a:hover {
         color: #ad805e;
     }
-=======
-  margin-bottom: 60px;
-}
 
-nav {
-    background-color: #AB7E5D !important;
+h1 {
+    font-family: "Amatic SC", serif;
+    font-weight: bolder;
+    color: #3A1947;
 }
-.nav-logo {
-  width: 120px;
-}
-
-.logo {
-    filter: saturate(0.7) grayscale(0.5);
-}
-
-body {
-    background-color: #ab7e5d1c;
+.row{
+    width: 100%;
 }
