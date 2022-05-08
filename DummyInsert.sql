@@ -65,6 +65,7 @@ insert into Members(MemberLastName, MemberFirstName, MemberAddress, MemberDOB, M
 insert into Members(MemberLastName, MemberFirstName, MemberAddress, MemberDOB, MembershipCategoryNumber) values('Adhikari', 'Sugam', 'Kathmandu', '2010-07-01', 1);
 insert into Members(MemberLastName, MemberFirstName, MemberAddress, MemberDOB, MembershipCategoryNumber) values('Bohora', 'Arun', 'Kathmandu',    '2001-02-03', 2);
 insert into Members(MemberLastName, MemberFirstName, MemberAddress, MemberDOB, MembershipCategoryNumber) values('Giri', 'Rijan', 'Kathmandu',     '2001-01-01', 3);
+insert into Members(MemberLastName, MemberFirstName, MemberAddress, MemberDOB, MembershipCategoryNumber) values('Shrestha', 'Sudip', 'Kathmandu',     '2001-01-01', 3);
 
 insert into CastMembers(DVDNumber, ActorNumber) values(1, 1);
 insert into CastMembers(DVDNumber, ActorNumber) values(2, 2);
@@ -87,3 +88,4 @@ insert into Loans(DateOut, DateDue, DateReturned, LoanTypeNumber, CopyNumber, Me
 insert into Loans(DateOut, DateDue, DateReturned, LoanTypeNumber, CopyNumber, MemberNumber) values('2022-04-19', '2022-05-19', '2022-05-11', 3, 8, 4);
 insert into Loans(DateOut, DateDue, DateReturned, LoanTypeNumber, CopyNumber, MemberNumber) values('2022-04-10', '2022-05-10', '2022-04-10', 2, 9, 4);
 insert into Loans(DateOut, DateDue, DateReturned, LoanTypeNumber, CopyNumber, MemberNumber) values('2022-04-11', '2022-05-11', '2022-04-11', 1, 10, 5);
+insert into Loans(DateOut, DateDue, DateReturned, LoanTypeNumber, CopyNumber, MemberNumber) values('2022-01-18', '2022-02-18', '2022-02-28', 1, 7, 7);

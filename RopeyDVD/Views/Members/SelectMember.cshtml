@@ -6,8 +6,8 @@
 <form asp-action = "MemberLoans">
     <div asp-validation-summary="ModelOnly" class="text"></div>
     <div class="form-group mt-3">
-        <label asp-for="MemberFirstName" class="control-label">View DVDs of the selected Actors</label>
-        <select asp-for="MemberFirstName" class="form-control" asp-items="ViewBag.MemberFirstName" name="memberList"></select>
+        <label asp-for="MemberLastName" class="control-label">View DVDs of the selected Actors</label>
+        <select asp-for="MemberLastName" class="form-control" asp-items="ViewBag.MemberLastName" name="memberList"></select>
         <button class="btn btn-primary mt-3" type="submit">Select Member</button>
     </div>
 </form>

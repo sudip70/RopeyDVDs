@@ -186,7 +186,7 @@ namespace RopeyDVD.Controllers
                                   group actors by new { casts.DVDNumber } into g
                                   select
                                     string.Join(" , ", g.OrderBy(c => c.ActorSurName).Select(x => (x.ActorFirstName + " " + x.ActorSurName))),
-                           Release = DVDTitle.DateReleased.ToString("dd MM yyyy"),
+                           Release = DVDTitle.DateReleased.ToString("dd-MM-yyyy"),
                        };
             data.OrderBy(c => c.Cast);
             return View(data);
@@ -246,7 +246,7 @@ namespace RopeyDVD.Controllers
         }
         public async Task<IActionResult> DVDsNotLoaned()
         {
-            var differenceDate = DateTime.Now.AddDays(-31);
+            var differenceDate = DateTime.Now.AddDays(-30);
             var loandedCopyIn31Days = (from loan in _context.Loans
                                        where loan.DateOut >= differenceDate
                                        select loan.CopyNumber).Distinct();

@@ -2,12 +2,15 @@
 @{
     ViewData["Title"] = "LoanedOutDVDCopies";
 }
+<h1>DVD loaned</h1>
 @if(ViewBag.NoData != null)
 {
     <h3>@ViewBag.NoData</h3>
 }
 else
-{<table class="table">
+{
+    <p>Total loans taken at @ViewBag.SelectedDate : @ViewBag.TotalLoans</p>
+    <table class="table">
     <thead>
         <tr>
             <th>Loan Number</th>
