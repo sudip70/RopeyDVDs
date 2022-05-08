@@ -152,5 +152,52 @@ namespace RopeyDVD.Controllers
         {
             return _context.Members.Any(e => e.MemberNumber == id);
         }
+        public async Task<IActionResult> SelectMember(Member members)
+        {
+            ViewData["MemberLastName"] = new SelectList(_context.Set<Member>(), "MemberLastName", "MemberLastName", members.MemberLastName);
+            return View();
+        }
+        public async Task<IActionResult> MemberLoans()
+        {
+            string memberName = Request.Form["memberList"].ToString();
+            var data = (from Member in _context.Members
+                          join Loan in _context.Loans on Member.MemberNumber equals Loan.LoanNumber
+                          join copy in _context.DVDCopies on Loan.LoanNumber equals copy.CopyNumber
+                          join title in _context.DVDTitles on copy.CopyNumber equals title.DVDNumber
+                          where Member.MemberLastName == memberName
+                          select new
+                          {
+                              MemberNumber = Member.MemberNumber,
+                              DVDNumber = title.DVDNumber,
+                              Title = title.DVDTitles,
+                              dateReturned = Loan.DateOut <= DateTime.Now.AddDays(31),
+                              CopyNumber = copy.CopyNumber
+                              
+                          });
+            return View(data);
+        }
+        public async Task<IActionResult> MemberNotBorrowed()
+        {
+            var notLoanedMembers = _context.Members.ToList().Except(from m in _context.Members.ToList()
+                                                                   join l in _context.Loans.ToList().Where(l => DateTime.Now.Subtract(l.DateOut).TotalDays <= 31)
+                                                                   on m.MemberNumber equals l.MemberNumber
+                                                                   select m);
+            var loanedMember = (from m in notLoanedMembers
+                                join Loan in _context.Loans on m.MemberNumber equals Loan.MemberNumber
+                                join DVDCopy in _context.DVDCopies on Loan.CopyNumber equals DVDCopy.CopyNumber
+                                join DVDTitle in _context.DVDTitles on DVDCopy.DVDNumber equals DVDTitle.DVDNumber
+                                select new
+                                {
+                                    DateOut = Loan.DateOut,
+                                    Title = DVDTitle.DVDTitles,
+                                    LoanDays = Convert.ToInt32(DateTime.Now.Subtract(Loan.DateOut).TotalDays),
+                                    MemberAddress = m.MemberAddress,
+                                    MemberFirstName = m.MemberFirstName,
+                                    MemberLastName = m.MemberLastName,
+                                });
+            return View(loanedMember);
+
+                               
+        }
     }
 }

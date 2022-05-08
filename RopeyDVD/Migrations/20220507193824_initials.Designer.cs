@@ -12,8 +12,8 @@ using RopeyDVD.Data;
 namespace RopeyDVD.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220507082130_updates")]
-    partial class updates
+    [Migration("20220507193824_initials")]
+    partial class initials
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -361,7 +361,7 @@ namespace RopeyDVD.Migrations
                     b.Property<DateTime>("DateOut")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DateReturned")
+                    b.Property<DateTime?>("DateReturned")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("LoanTypeNumber")
@@ -629,7 +629,7 @@ namespace RopeyDVD.Migrations
                         .IsRequired();
 
                     b.HasOne("RopeyDVD.Models.Member", "Member")
-                        .WithMany()
+                        .WithMany("Loan")
                         .HasForeignKey("MemberNumber")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -673,6 +673,11 @@ namespace RopeyDVD.Migrations
                 });
 
             modelBuilder.Entity("RopeyDVD.Models.LoanType", b =>
+                {
+                    b.Navigation("Loan");
+                });
+
+            modelBuilder.Entity("RopeyDVD.Models.Member", b =>
                 {
                     b.Navigation("Loan");
                 });

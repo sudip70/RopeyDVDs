@@ -11,5 +11,6 @@ namespace RopeyDVD.Models
         public string? MemberAddress { get; set; }
         public DateTime MemberDOB { get; set; }
         public MembershipCategory? MembershipCategory { get; set; }
+        public ICollection<Loan>? Loan { get; set; }
     }
 }
