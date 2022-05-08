@@ -1,0 +1,24 @@
+﻿@{
+    Layout = "_LayoutAdmin";
+    ViewData["Title"] = "Admin";
+}
+<div class="card card-auth col-12 col-lg-6 mx-auto p-5">
+    <div class="row text-center">
+        <div class="col-12">
+            <h1>
+                Welcome to
+            </h1>
+            <img src="~/imgs/nobg/spin.gif" alt="logo" class="logo admin-logo mx-auto"/>
+        </div>
+
+        <div class="col-md-9 col-12 mx-auto">
+            <a class="btn btn-primary" onclick="openNav()">
+                Explore
+            </a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

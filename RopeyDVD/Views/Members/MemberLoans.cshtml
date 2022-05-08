@@ -1,7 +1,18 @@
 ﻿@*@model IEnumerable<RopeyDVD.Models.Members>*@
 @{
-    ViewData["Title"] = "MemberLoans";
+    Layout = "_LayoutAdmin";
+    ViewData["Title"] = "History";
 }
+
+<div class="row">
+    <div class="col-md-10 col-12">
+        <h1>History</h1>
+        <p class="txt-secondary">History of DVDs loaned by the selected member</p>
+    </div>
+    <div class="col-md-2 col-12">
+        <a class="btn btn-primary" asp-area="" asp-controller="Members" asp-action="SelectMember">Search</a>
+    </div>
+</div>
 @if(ViewBag.NoData != null)
 {
     <h3>@ViewBag.NoData</h3>

@@ -1,10 +1,17 @@
 ﻿@{
-    ViewData["Title"] = "OlderCopiesDVD";
+    Layout = "_LayoutAdmin";
+    ViewData["Title"] = "Older DVDs";
 }
-<h1>Older DVD Copies</h1>
-<form asp-action="RemovedOldCopies">
-    <button type="submit">Remove Old DVD Copies</button>
-</form>
+<div class="row mx-auto mb-4">
+    <div class="col-md-9 col-12">
+        <h1>Older DVDs</h1>
+    </div>
+    <div class="col-md-3 col-12">
+        <form asp-action="RemovedOldCopies">
+            <button type="submit" class="btn btn-primary">Remove Old DVD Copies</button>
+        </form>
+    </div>
+</div>
 
 <table class="table">
     <thead>

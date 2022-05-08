@@ -181,6 +181,16 @@ namespace RopeyDVD.Controllers
 
             return token;
         }
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return View("Index");
+        }
+        //for admin dashboard
+        public IActionResult Admin()
+        {
+            return View("Admin");
+        }
     }
 }
 

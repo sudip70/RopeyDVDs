@@ -1,7 +1,16 @@
 ﻿@{
     ViewData["Title"] = "ShowDVDsofActors";
 }
-<h1> Show all the DVDs of Actors</h1>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-10 col-12">
+            <h1> Show all the DVDs of Actors</h1>
+        </div>
+        <div class="col-md-2 col-12">
+            <a class="btn btn-primary" asp-action="SelectActors">Search</a>
+        </div>
+    </div>
+</div>
 
 @if(Model!=null){
     <table class="table">

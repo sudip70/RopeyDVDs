@@ -60,7 +60,8 @@
     top: 0;
     left: 0;
     background-color: #f7f6f4f2;
-    overflow-y: hidden;
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+    overflow-y: scroll; /* Add vertical scrollbar */
     transition: 0.5s;
 }
 
@@ -69,7 +70,7 @@
     top: 25%;
     width: 100%;
     text-align: center;
-    /*margin-top: 30px;*/
+    margin-bottom: 300px;
 }
 
 .overlay a {

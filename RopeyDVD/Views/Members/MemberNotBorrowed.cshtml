@@ -1,8 +1,10 @@
 ﻿@*@model IEnumerable<RopeyDVD.Models.Members>*@
 @{
-    ViewData["Title"] = "MemberNotBorrowed";
+    Layout = "_LayoutAdmin";
+    ViewData["Title"] = "Passive Members";
 }
-<h1>Members Who have not Borrowed any DVDs in Last 31 Days</h1>
+<h1>Passive Members</h1>
+<p class="txt-secondary">Members who have not Borrowed any DVDs in Last 31 Days</p>
 @if(ViewBag.NoData != null)
 {
     <h3>@ViewBag.NoData</h3>
