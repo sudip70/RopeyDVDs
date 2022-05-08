@@ -4,25 +4,63 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
-
 <div>
-    <h4>DVDCopy</h4>
+    <h4>DVD Copy Details</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DatePurchased)
+            DVD Copy Number
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DatePurchased)
+            @Html.DisplayFor(model => model.CopyNumber)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DVDTitle)
+            DVD Number
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.DVDTitle.DVDNumber)
         </dd>
+        <dt class = "col-sm-2">
+            DVD Title
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DVDTitle.DVDTitles)
+        </dd>
+        <dt class = "col-sm-2">
+            DVD Copy Purchased On
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DatePurchased)
+        </dd>
+        @if (ViewBag.MemberName != null)
+        {
+            <dt class = "col-sm-2">
+            Last Loaned By
+        </dt>
+        <dd class = "col-sm-10">
+            @ViewBag.MemberName
+        </dd>
+        <dt class = "col-sm-2">
+            Loaned On
+        </dt>
+        <dd class = "col-sm-10">
+            @ViewBag.loan.DateOut
+        </dd>
+        <dt class = "col-sm-2">
+            Loan Due On 
+        </dt>
+        <dd class = "col-sm-10">
+            @ViewBag.loan.DateDue
+        </dd>
+        <dt class = "col-sm-2">
+            Returned On
+        </dt>
+        <dd class = "col-sm-10">
+            @(ViewBag.loan.DateReturned ?? "Not Returned Yet")
+        </dd>
+        }
     </dl>
+    
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.CopyNumber">Edit</a> |

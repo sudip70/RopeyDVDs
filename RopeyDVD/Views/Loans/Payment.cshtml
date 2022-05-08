@@ -1,0 +1,49 @@
+﻿
+
+@{
+    ViewData["Title"] = "Payment";
+}
+<h1>Payment</h1>
+
+<div>
+    <h4>Loans</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-7">
+            Loan Number
+        </dt>
+        <dd class = "col-sm-5">
+            @Model.LoanNumber
+            </dd>
+        <dt>Copy Number</dt>
+        <dd>@Model.CopyNumber</dd>
+        <dt>DVD Title</dt>
+        <dd>@Model.DVDTitle</dd>
+        <dt>Date Out</dt>
+        <dd>@Model.DateOut.ToString("dd-MMMM-yyyy")</dd>
+        <dt>Date Due</dt>
+        <dd>@Model.DateDue.ToString("dd-MMMM-yyyy")</dd>
+        <dt>Date Returned</dt>
+        <dd>@Model.DateReturned.ToString("dd-MMMM-yyyy")</dd>
+        <dt>Member</dt>
+        <dd>@Model.Member</dd>
+        <dt>Membership Type</dt>
+        <dd>@Model.Membership</dd>
+        <dt>Loan Type</dt>
+        <dd>@Model.LoanType</dd>
+        <dt>Standard Charge (per day @Model.StandardCharge</dt>
+        <dd>@(Model.StandardCharge * Model.LoanDuration)</dd>
+        @if (Model.DateReturned.Subtract(Model.DateOut).Days > Model.LoanDuration)
+        {
+              <dt>
+                  Penalty Charge (per Day @Model.PenaltyCharge)
+              </dt>
+              <dd>@((Model.DateReturned.Subtract(Model.DateOut).Days - Model.LoanDuration ) * Model.PenaltyCharge)</dd>
+        
+        }
+
+    </dl>
+</div>
+<div>
+    <a asp-action="Index" asp-controller="Home">Back to Home page</a>
+</div>
