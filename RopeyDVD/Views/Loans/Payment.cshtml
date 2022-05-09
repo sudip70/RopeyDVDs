@@ -1,44 +1,42 @@
 ﻿
 
 @{
+    Layout = "_LayoutAdmin";
     ViewData["Title"] = "Payment";
 }
 <h1>Payment</h1>
 
-<div>
-    <h4>Loans</h4>
+
+<div class="card p-5 col-lg-9 col-12 mx-auto">
+    <h1 class="text-center">Loans</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-7">
-            Loan Number
-        </dt>
-        <dd class = "col-sm-5">
-            @Model.LoanNumber
-            </dd>
-        <dt>Copy Number</dt>
-        <dd>@Model.CopyNumber</dd>
-        <dt>DVD Title</dt>
-        <dd>@Model.DVDTitle</dd>
-        <dt>Date Out</dt>
-        <dd>@Model.DateOut.ToString("dd-MMMM-yyyy")</dd>
-        <dt>Date Due</dt>
-        <dd>@Model.DateDue.ToString("dd-MMMM-yyyy")</dd>
-        <dt>Date Returned</dt>
-        <dd>@Model.DateReturned.ToString("dd-MMMM-yyyy")</dd>
-        <dt>Member</dt>
-        <dd>@Model.Member</dd>
-        <dt>Membership Type</dt>
-        <dd>@Model.Membership</dd>
-        <dt>Loan Type</dt>
-        <dd>@Model.LoanType</dd>
-        <dt>Standard Charge (per day @Model.StandardCharge</dt>
-        <dd>@(Model.StandardCharge * Model.LoanDuration)</dd>
+        <dt class = "col-sm-7">Loan Number</dt>
+        <dd class = "col-sm-5">@Model.LoanNumber</dd>
+        <dt class = "col-sm-7">Copy Number</dt>
+        <dd class = "col-sm-5">@Model.CopyNumber</dd>
+        <dt class = "col-sm-7">DVD Title</dt>
+        <dd class = "col-sm-5">@Model.DVDTitle</dd>
+        <dt class = "col-sm-7">Date Out</dt>
+        <dd class = "col-sm-5">@Model.DateOut.ToString("dd-MMMM-yyyy")</dd>
+        <dt class = "col-sm-7">Date Due</dt>
+        <dd class = "col-sm-5">@Model.DateDue.ToString("dd-MMMM-yyyy")</dd>
+        <dt class = "col-sm-7">Date Returned</dt>
+        <dd class = "col-sm-5">@Model.DateReturned.ToString("dd-MMMM-yyyy")</dd>
+        <dt class = "col-sm-7">Member</dt>
+        <dd class = "col-sm-5">@Model.Member</dd>
+        <dt class = "col-sm-7">Membership Type</dt>
+        <dd class = "col-sm-5">@Model.Membership</dd>
+        <dt class = "col-sm-7">Loan Type</dt>
+        <dd class = "col-sm-5">@Model.LoanType</dd>
+        <dt class = "col-sm-7">Standard Charge (per day @Model.StandardCharge</dt>
+        <dd class = "col-sm-5">@(Model.StandardCharge * Model.LoanDuration)</dd>
         @if (Model.DateReturned.Subtract(Model.DateOut).Days > Model.LoanDuration)
         {
-              <dt>
+              <dt class = "col-sm-7">
                   Penalty Charge (per Day @Model.PenaltyCharge)
               </dt>
-              <dd>@((Model.DateReturned.Subtract(Model.DateOut).Days - Model.LoanDuration ) * Model.PenaltyCharge)</dd>
+              <dd class = "col-sm-5">@((Model.DateReturned.Subtract(Model.DateOut).Days - Model.LoanDuration ) * Model.PenaltyCharge)</dd>
         
         }
 

@@ -23,7 +23,7 @@
             <a class="nav-link text-dark" asp-area="" asp-controller="DVDTitles" asp-action="DVDDetailsIndex">DVD Details</a>
 
             <a class="nav-link text-dark" asp-area="" asp-controller="DVDCopies" asp-action="OlderCopiesDVD">Older DVDs</a>
-            <a class="nav-link text-dark" asp-area="" asp-controller="DVDCopies" asp-action="SelectDate">Select Date</a>
+            <a class="nav-link text-dark" asp-area="" asp-controller="DVDCopies" asp-action="SelectDate">DVDs Loaned</a>
             <a class="nav-link text-dark" asp-area="" asp-controller="Members" asp-action="MemberNotBorrowed">Passive Members</a>
             <a class="nav-link text-dark" asp-area="" asp-controller="DVDTitles" asp-action="DVDsNotLoaned">Unpopular DVDs</a>
 
@@ -78,9 +78,17 @@
                                 <img src="@Url.Content("~/imgs/nobg/ropey.png")" alt="logo" class="nav-logo logo" />
                             </a>
                             <div class="col-md-1 col-12 my-auto">
-                                <a class="btn btn-secondary" asp-area="" asp-controller="Auth" asp-action="Login">
-                                    Login
-                                </a>
+                                <ul class="navbar-nav">
+                                    <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      <img src="~/imgs/profile.png" width="40" height="40" class="rounded-circle">
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                      <a class="dropdown-item" href="#">Dashboard</a>
+                                      <a class="dropdown-item" href="#">Edit Profile</a>
+                                    </div>
+                                  </li>   
+                                </ul>
                             </div>
                         </div>
                     </div>

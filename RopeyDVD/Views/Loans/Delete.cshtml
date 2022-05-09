@@ -1,57 +1,65 @@
 ﻿@model RopeyDVD.Models.Loan
 
 @{
+    Layout = "_LayoutAdmin";
     ViewData["Title"] = "Delete";
 }
 
-<h1>Delete</h1>
+<div class="card p-5 col-lg-9 col-12 mx-auto">
+    <h1 class="text-center">Delete Loan</h1>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Loan</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DateOut)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DateOut)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DateDue)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DateDue)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DateReturned)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DateReturned)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.LoanType)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LoanType.LoanTypeNumber)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DVDCopy)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DVDCopy.CopyNumber)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Member)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Member.MemberNumber)
-        </dd>
-    </dl>
+    <p class="txt-secondary text-center">Are you sure you want to delete this?</p>
+    <div>
+        <hr />
+        <dl class="row">
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.DateOut)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.DateOut)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.DateDue)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.DateDue)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.DateReturned)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.DateReturned)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.LoanType)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.LoanType.LoanTypeNumber)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.DVDCopy)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.DVDCopy.CopyNumber)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Member)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Member.MemberNumber)
+            </dd>
+        </dl>
     
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="LoanNumber" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
+        <form asp-action="Delete">
+            <div class="row">
+            <input type="hidden" asp-for="LoanNumber" />
+                <div class="form-group col-12 col-md-4">
+                    <input type="submit" value="Delete" class="btn btn-danger" />
+                </div>
+                <div class="col-12 col-md-4">
+                    <a class="btn btn-secondary" asp-action="Index">Back to List</a>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>

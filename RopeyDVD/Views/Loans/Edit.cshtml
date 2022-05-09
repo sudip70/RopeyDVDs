@@ -1,58 +1,58 @@
 ﻿@model RopeyDVD.Models.Loan
 
 @{
+    Layout = "_LayoutAdmin";
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<div class="card p-5 col-lg-9 col-12 mx-auto">
+    <h1 class="text-center">Edit Loan</h1>
 
-<h4>Loan</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+    <hr />
         <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="LoanNumber" />
-            <div class="form-group">
-                <label asp-for="DateOut" class="control-label"></label>
-                <input asp-for="DateOut" class="form-control" />
-                <span asp-validation-for="DateOut" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DateDue" class="control-label"></label>
-                <input asp-for="DateDue" class="form-control" />
-                <span asp-validation-for="DateDue" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DateReturned" class="control-label"></label>
-                <input asp-for="DateReturned" class="form-control" />
-                <span asp-validation-for="DateReturned" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LoanTypeNumber" class="control-label"></label>
-                <select asp-for="LoanTypeNumber" class="form-control" asp-items="ViewBag.LoanTypeNumber"></select>
-                <span asp-validation-for="LoanTypeNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CopyNumber" class="control-label"></label>
-                <select asp-for="CopyNumber" class="form-control" asp-items="ViewBag.CopyNumber"></select>
-                <span asp-validation-for="CopyNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MemberNumber" class="control-label"></label>
-                <select asp-for="MemberNumber" class="form-control" asp-items="ViewBag.MemberNumber"></select>
-                <span asp-validation-for="MemberNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+            <div class="row">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="LoanNumber" />
+                <div class="form-group">
+                    <label asp-for="DateOut" class="control-label"></label>
+                    <input asp-for="DateOut" class="form-control" />
+                    <span asp-validation-for="DateOut" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DateDue" class="control-label"></label>
+                    <input asp-for="DateDue" class="form-control" />
+                    <span asp-validation-for="DateDue" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DateReturned" class="control-label"></label>
+                    <input asp-for="DateReturned" class="form-control" />
+                    <span asp-validation-for="DateReturned" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LoanTypeNumber" class="control-label"></label>
+                    <select asp-for="LoanTypeNumber" class="form-control" asp-items="ViewBag.LoanTypeNumber"></select>
+                    <span asp-validation-for="LoanTypeNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CopyNumber" class="control-label"></label>
+                    <select asp-for="CopyNumber" class="form-control" asp-items="ViewBag.CopyNumber"></select>
+                    <span asp-validation-for="CopyNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="MemberNumber" class="control-label"></label>
+                    <select asp-for="MemberNumber" class="form-control" asp-items="ViewBag.MemberNumber"></select>
+                    <span asp-validation-for="MemberNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group col-12 col-md-4">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+                <div class="col-12 col-md-4">
+                    <a class="btn btn-secondary" asp-action="Index">Back to List</a>
+                </div>
             </div>
         </form>
-    </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

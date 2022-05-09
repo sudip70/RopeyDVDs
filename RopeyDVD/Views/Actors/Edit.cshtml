@@ -11,23 +11,25 @@
 
     <hr />
     <form asp-action="Edit">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <input type="hidden" asp-for="ActorNumber" />
-        <div class="form-group">
-            <label asp-for="ActorSurName" class="control-label"></label>
-            <input asp-for="ActorSurName" class="form-control" />
-            <span asp-validation-for="ActorSurName" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="ActorFirstName" class="control-label"></label>
-            <input asp-for="ActorFirstName" class="form-control" />
-            <span asp-validation-for="ActorFirstName" class="text-danger"></span>
-        </div>
-        <div class="form-group col-12 col-md-4">
-            <input type="submit" value="Save" class="btn btn-primary" />
-        </div>
-        <div class="col-12 col-md-4">
-            <a class="btn btn-secondary" asp-action="Index">Back to List</a>
+        <div class="row">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ActorNumber" />
+            <div class="form-group">
+                <label asp-for="ActorSurName" class="control-label"></label>
+                <input asp-for="ActorSurName" class="form-control" />
+                <span asp-validation-for="ActorSurName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ActorFirstName" class="control-label"></label>
+                <input asp-for="ActorFirstName" class="form-control" />
+                <span asp-validation-for="ActorFirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group col-12 col-md-4">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+            <div class="col-12 col-md-4">
+                <a class="btn btn-secondary" asp-action="Index">Back to List</a>
+            </div>
         </div>
     </form>
 
