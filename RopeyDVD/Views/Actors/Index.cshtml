@@ -1,14 +1,20 @@
 ﻿@model IEnumerable<RopeyDVD.Models.Actor>
 
 @{
+    Layout = "_LayoutAdmin";
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<div class="row mx-auto mb-4">
+    <div class="col-md-9 col-12">
+        <h1>Index</h1>
+    </div>
+    <div class="col-md-3 col-12">
+        <p>
+            <a class="btn btn-primary" asp-action="Create">Create New</a>
+        </p>
+    </div>
+</div>
 <table class="table">
     <thead>
         <tr>
@@ -31,11 +37,12 @@
                 @Html.DisplayFor(modelItem => item.ActorFirstName)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ActorNumber">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ActorNumber">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ActorNumber">Delete</a>
+                <a class="btn edit" asp-action="Edit" asp-route-id="@item.ActorNumber">Edit</a> |
+                <a class="btn details" asp-action="Details" asp-route-id="@item.ActorNumber">Details</a> |
+                <a class="btn delete" asp-action="Delete" asp-route-id="@item.ActorNumber">Delete</a>
             </td>
         </tr>
 }
+
     </tbody>
 </table>
