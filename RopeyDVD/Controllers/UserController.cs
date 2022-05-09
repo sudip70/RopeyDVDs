@@ -25,19 +25,19 @@ namespace RopeyDVD.Controllers
                 _userService = userService;
             }
 
-            [Authorize(Roles = "Manager, Assistant")]
+            //[Authorize(Roles = "Manager, Assistant")]
             public IActionResult Profile()
             {
                 return View();
             }
 
-            [Authorize(Roles = "Manager, Assistant")]
+            //[Authorize(Roles = "Manager, Assistant")]
             public IActionResult ChangePassword()
             { 
                 return View();
             }
             [HttpPost]
-            [Authorize(Roles = "Manager, Assistant")]
+            //[Authorize(Roles = "Manager, Assistant")]
             public async Task<IActionResult> ChangePassword(UpdatePassword model)
             {
                 var authUser = _userService.GetUser();
@@ -55,7 +55,7 @@ namespace RopeyDVD.Controllers
                     return RedirectToAction("Profile");
                 }
             }
-            [Authorize(Roles ="Manager")]
+            //[Authorize(Roles ="Manager")]
             public IActionResult ViewUsers()
             {
                 var users = _userManager.Users.Select(c => new UserDetailsViewModel()
@@ -65,7 +65,7 @@ namespace RopeyDVD.Controllers
                 }).ToList();
                 return View(users);
             }
-            [Authorize(Roles ="Manager")]
+            //[Authorize(Roles ="Manager")]
             public async Task<IActionResult> EditUser(string id)
             {
                 UpdateUserDetails updateUserDetails = new UpdateUserDetails();
@@ -87,7 +87,7 @@ namespace RopeyDVD.Controllers
             }
 
             [HttpPost]
-            [Authorize(Roles = "Manager")]
+            //[Authorize(Roles = "Manager")]
             public async Task<IActionResult> UpdateUser(string id, UpdateUserDetails detailModel)
             {
                 if (id == null)
@@ -130,7 +130,7 @@ namespace RopeyDVD.Controllers
                 }
 
             }
-            [Authorize(Roles = "Manager")]
+            //[Authorize(Roles = "Manager")]
             public async Task<IActionResult> DeleteUser(string? id)
             {
                 UpdateUserDetails updateUserDetails = new UpdateUserDetails();
@@ -152,7 +152,7 @@ namespace RopeyDVD.Controllers
 
             [HttpPost, ActionName("Delete")]
             [ValidateAntiForgeryToken]
-            [Authorize(Roles = "Manager")]
+            //[Authorize(Roles = "Manager")]
             public async Task<IActionResult> DeleteConfirmed(string? id)
             {
                 var user = await _userManager.FindByIdAsync(id);
@@ -161,7 +161,7 @@ namespace RopeyDVD.Controllers
                 return RedirectToAction("ViewUsers"); //show message
             }
 
-            [Authorize(Roles = "Manager")]
+            //[Authorize(Roles = "Manager")]
             public IActionResult CreateUser()
             {
                 return View();
@@ -169,7 +169,7 @@ namespace RopeyDVD.Controllers
 
             [HttpPost]
             [ValidateAntiForgeryToken]
-            [Authorize(Roles = "Manager")]
+            //[Authorize(Roles = "Manager")]
             public async Task<IActionResult> StoreUser(UserRegister model)
             {
                 var userExists = await _userManager.FindByNameAsync(model.UserName);

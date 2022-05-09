@@ -4,11 +4,9 @@
     Layout = "_LayoutAdmin";
     ViewData["Title"] = "Payment";
 }
-<h1>Payment</h1>
-
 
 <div class="card p-5 col-lg-9 col-12 mx-auto">
-    <h1 class="text-center">Loans</h4>
+    <h1 class="text-center">Payment Loans</h1>
     <hr />
     <dl class="row">
         <dt class = "col-sm-7">Loan Number</dt>
@@ -41,7 +39,10 @@
         }
 
     </dl>
-</div>
-<div>
-    <a asp-action="Index" asp-controller="Home">Back to Home page</a>
+    <div class="row">
+        <div class="col-12 col-md-4">
+            <a class="btn btn-secondary" asp-action="Admin" asp-controller="Auth">Back to Home page</a>
+        </div>
+    </div>
+
 </div>
