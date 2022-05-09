@@ -74,19 +74,23 @@
                                 </div>
                             </div>
 
-                            <a asp-controller="Home" asp-action="Index" class="text-center col-md-10 col-8">
+                            <a asp-controller="Home" asp-action="Index" class="text-center col-md-9 col-8">
                                 <img src="@Url.Content("~/imgs/nobg/ropey.png")" alt="logo" class="nav-logo logo" />
                             </a>
-                            <div class="col-md-1 col-12 my-auto">
+                            <div class="col-md-2 col-12 my-auto">
                                 <ul class="navbar-nav">
                                     <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                       <img src="~/imgs/profile.png" width="40" height="40" class="rounded-circle">
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                      <a class="dropdown-item" href="#">Dashboard</a>
-                                      <a class="dropdown-item" href="#">Edit Profile</a>
-                                      <a class="btn btn-secondary" asp-area="" asp-controller="Auth" asp-action="Login">Logout</a>
+                                      <a class="dropdown-item" asp-area="" asp-action="Profile" asp-controller="User">Profile</a>
+                                      <a class="dropdown-item" asp-area="" asp-action="CreateUser" asp-controller="User">Create User</a>
+                                      <a class="dropdown-item" asp-area="" asp-action="EditUser" asp-controller="User">Edit User</a>
+                                      <a class="dropdown-item" asp-area="" asp-action="DeleteUser" asp-controller="User">Delete User</a>
+                                      <a class="dropdown-item" asp-area="" asp-action="ViewUsers" asp-controller="User">View Users</a>
+                                      <a class="dropdown-item" asp-area="" asp-action="ChangePassword" asp-controller="User">Change Password</a>
+                                      <a class="dropdown-item" asp-area="" asp-action="Auth" asp-controller="Login">Logout</a>
                                     </div>
                                   </li>   
                                 </ul>
