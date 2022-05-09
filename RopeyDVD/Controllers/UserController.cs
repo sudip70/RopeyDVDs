@@ -36,25 +36,25 @@ namespace RopeyDVD.Controllers
         { 
             return View();
         }
-        [HttpPost]
-        [Authorize(Roles = "Manager, Assistant")]
-        public async Task<IActionResult> ChangePassword(UpdatePassword model)
-        {
-            var authUser = _configuration.GetUser();
-            var user = await _userManager.FindByNameAsync(authUser);
-            var result = await _userManager.ChangePasswordAsync(user, model.CurrentPassword, model.NewPassword);
+        //[HttpPost]
+        //[Authorize(Roles = "Manager, Assistant")]
+        //public async Task<IActionResult> ChangePassword(UpdatePassword model)
+        //{
+        //    var authUser = _configuration.GetUser();
+        //    var user = await _userManager.FindByNameAsync(authUser);
+        //    var result = await _userManager.ChangePasswordAsync(user, model.CurrentPassword, model.NewPassword);
 
-            if (result.Succeeded)
-            {
-                TempData["SuccessAlert"] = "Password changed successfully";
-               return RedirectToAction("Profile"); //without error
-           }
-           else
-            {
-                TempData["DangerAlert"] = "Password couldn\'t be changed";
-                return RedirectToAction("Profile"); //with error
-            }
-        }
+        //    if (result.Succeeded)
+        //    {
+        //        TempData["SuccessAlert"] = "Password changed successfully";
+        //       return RedirectToAction("Profile"); //without error
+        //   }
+        //   else
+        //    {
+        //        TempData["DangerAlert"] = "Password couldn\'t be changed";
+        //        return RedirectToAction("Profile"); //with error
+        //    }
+        //}
 
       
    }
