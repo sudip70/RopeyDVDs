@@ -7,7 +7,7 @@ namespace RopeyDVD.Models
         [Key]
         public int LoanTypeNumber { get; set; }
         public string? LoanTypes { get; set; }
-        public string? LoanDuration { get; set; }
+        public int LoanDuration { get; set; }
         public ICollection<Loan>? Loan { get; set; }
     }
 }

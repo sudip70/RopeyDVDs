@@ -23,7 +23,24 @@ namespace RopeyDVD.Controllers
         // GET: Members
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Members.ToListAsync());
+            var applicationDBContext = from members in _context.Members
+                                       join membership in _context.MembershipCategories on members.MembershipCategoryNumber equals membership.MembershipCategoryNumber
+                                       select new
+                                       {
+                                           MemberNumber = members.MemberNumber,
+                                           MemberFirstName = members.MemberFirstName,
+                                           MemberLastName = members.MemberLastName,
+                                           MemberAddress = members.MemberAddress,
+                                           MemberDOB = members.MemberDOB,
+                                           Membership = membership.MembershipCategoryDescription,
+                                           TotalAcceptLoans = membership.MembershipCategoryTotalLoans,
+                                           TotalCurrentLoans = (from loans in _context.Loans
+                                                                where loans.DateReturned == null
+                                                                where loans.MemberNumber == members.MemberNumber
+                                                                select loans).Count(),
+
+                                       };
+            return View(await applicationDBContext.ToListAsync());
         }
 
         // GET: Members/Details/5
@@ -35,13 +52,43 @@ namespace RopeyDVD.Controllers
             }
 
             var member = await _context.Members
+                .Include(m => m.MembershipCategory)
                 .FirstOrDefaultAsync(m => m.MemberNumber == id);
+
+            //Get datetime of 31 days ago
+            var differenceDate = DateTime.Now.AddDays(-31);
+
+            //get all data
+            var data = from members in _context.Members
+                       join loan in _context.Loans on members.MemberNumber equals loan.MemberNumber
+                       where loan.DateOut >= differenceDate
+                       where members.MemberNumber == id
+                       join dvdcopy in _context.DVDCopies on loan.CopyNumber equals dvdcopy.CopyNumber
+                       join dvdtitle in _context.DVDTitles on dvdcopy.DVDNumber equals dvdtitle.DVDNumber
+                       select new
+                       {
+                           Loan = loan.LoanNumber,
+                           CopyNumber = dvdcopy.CopyNumber,
+                           Title = dvdtitle.DVDTitles,
+                           DateOut = loan.DateOut,
+                           DateReturn = loan.DateReturned
+
+                       };
             if (member == null)
             {
                 return NotFound();
             }
-
-            return View(member);
+            if (data == null)
+            {
+                ViewData["Member"] = member;
+                return View(member);
+            }
+            else
+            {
+                ViewData["Member"] = member;
+                return View(data);
+            }
+            
         }
 
         // GET: Members/Create

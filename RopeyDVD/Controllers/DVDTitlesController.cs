@@ -51,9 +51,18 @@ namespace RopeyDVD.Controllers
         // GET: DVDTitles/Create
         public IActionResult Create()
         {
-            ViewData["CategoryNumber"] = new SelectList(_context.DVDCategories, "CategoryNumber", "CategoryNumber");
-            ViewData["ProducerNumber"] = new SelectList(_context.Producers, "ProducerNumber", "ProducerNumber");
-            ViewData["StudioNumber"] = new SelectList(_context.Studios, "StudioNumber", "StudioNumber");
+            ViewData["CategoryNumber"] = new SelectList(_context.Set<DVDCategory>(), "CategoryNumber", "CategoryDescription");
+            ViewData["ProducerNumber"] = new SelectList(_context.Set<Producer>(), "ProducerNumber", "ProducerName");
+            ViewData["StudioNumber"] = new SelectList(_context.Set<Studio>(), "StudioNumber", "StudioName");
+            var data = from actor in _context.Actors
+                       orderby actor.ActorFirstName, actor.ActorSurName
+                       select new
+                       {
+                           ActorNumber = actor.ActorNumber,
+                           ActorName = actor.ActorFirstName + " " + actor.ActorSurName,
+                       };
+
+            ViewData["ListBoxData"] = data;
             return View();
         }
 
@@ -62,17 +71,44 @@ namespace RopeyDVD.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("DVDNumber,DVDTitles,DateReleased,StandardCharge,PenaltyCharge,CategoryNumber,StudioNumber,ProducerNumber")] DVDTitle dVDTitle)
+        public async Task<IActionResult> Create([Bind("DVDNumber,DVDTitles,DateReleased,StandardCharge,PenaltyCharge,CategoryNumber,StudioNumber,ProducerNumber")] DVDTitle dVDTitle, List<int> multipleSelect)
         {
             if (ModelState.IsValid)
             {
+                //saving dvd entry to database
                 _context.Add(dVDTitle);
                 await _context.SaveChangesAsync();
+
+                //Get the dvd number from last entry
+                var latestEntry = (from dvdtitle in _context.DVDTitles
+                                   orderby dvdtitle.DVDNumber descending
+                                   select dvdtitle.DVDNumber).FirstOrDefault();
+                foreach(int id in multipleSelect)
+                {
+                    //Creating object for Castmemeber
+                    CastMember castMember = new CastMember();
+                    castMember.DVDNumber = latestEntry;
+                    castMember.ActorNumber = id;
+                    //Save object to database
+                    _context.Add(castMember);
+                    await _context.SaveChangesAsync();
+                }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryNumber"] = new SelectList(_context.DVDCategories, "CategoryNumber", "CategoryNumber", dVDTitle.CategoryNumber);
-            ViewData["ProducerNumber"] = new SelectList(_context.Producers, "ProducerNumber", "ProducerNumber", dVDTitle.ProducerNumber);
-            ViewData["StudioNumber"] = new SelectList(_context.Studios, "StudioNumber", "StudioNumber", dVDTitle.StudioNumber);
+            ViewData["CategoryNumber"] = new SelectList(_context.Set<DVDCategory>(), "CategoryNumber", "CategoryNumber", dVDTitle.CategoryNumber);
+            ViewData["ProducerNumber"] = new SelectList(_context.Set<Producer>(), "ProducerNumber", "ProducerNumber", dVDTitle.ProducerNumber);
+            ViewData["StudioNumber"] = new SelectList(_context.Set<Studio>(), "StudioNumber", "StudioNumber", dVDTitle.StudioNumber);
+
+            //Using LINQ to get Actors data
+            var data = from actor in _context.Actors
+                       orderby actor.ActorFirstName, actor.ActorSurName
+                       select new
+                       {
+                           ActorNumber = actor.ActorNumber,
+                           ActorName = actor.ActorFirstName + " " + actor.ActorSurName,
+                       };
+
+            ViewData["ListBoxData"] = data;
             return View(dVDTitle);
         }
 

@@ -1,5 +1,4 @@
 ﻿@model RopeyDVD.Models.DVDCopy
-
 @{
     ViewData["Title"] = "Details";
 }
@@ -9,19 +8,58 @@
     <div>
         <hr />
         <dl class="row">
+        <dt class = "col-sm-4">
+            DVD Copy Number
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.CopyNumber)
+        </dd>
+        <dt class = "col-sm-4">
+            DVD Number
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.DVDTitle.DVDNumber)
+        </dd>
+        <dt class = "col-sm-4">
+            DVD Title
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.DVDTitle.DVDTitles)
+        </dd>
+        <dt class = "col-sm-4">
+            DVD Copy Purchased On
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.DatePurchased)
+        </dd>
+        @if (ViewBag.lastLoanMemberName != null)
+        {
             <dt class = "col-sm-4">
-                @Html.DisplayNameFor(model => model.DatePurchased)
-            </dt>
-            <dd class = "col-sm-8">
-                @Html.DisplayFor(model => model.DatePurchased)
-            </dd>
-            <dt class = "col-sm-4">
-                @Html.DisplayNameFor(model => model.DVDTitle)
-            </dt>
-            <dd class = "col-sm-8">
-                @Html.DisplayFor(model => model.DVDTitle.DVDNumber)
-            </dd>
-        </dl>
+            Last Loaned By
+        </dt>
+        <dd class = "col-sm-8">
+            @ViewBag.lastLoanMemberName
+        </dd>
+        <dt class = "col-sm-4">
+            Loaned On
+        </dt>
+        <dd class = "col-sm-8">
+            @ViewBag.loanData.DateOut
+        </dd>
+        <dt class = "col-sm-4">
+            Loan Due On 
+        </dt>
+        <dd class = "col-sm-8">
+            @ViewBag.loanData.DateDue
+        </dd>
+        <dt class = "col-sm-4">
+            Returned On
+        </dt>
+        <dd class = "col-sm-8">
+            @(ViewBag.loanData.DateReturned ?? "Not Returned Yet")
+        </dd>
+        }
+    </dl>
     </div>
     <div class="row">
         <div class="col-12 col-md-4">

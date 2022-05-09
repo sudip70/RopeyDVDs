@@ -1,10 +1,10 @@
-﻿@model IEnumerable<RopeyDVD.Models.Member>
+﻿@*@model IEnumerable<Ropey_DvDs_Group_CW.Models.MemberModel>*@
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Members Index</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -13,35 +13,53 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.MemberLastName)
+                First Name
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MemberFirstName)
+                Last Name
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MemberAddress)
+                Address
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MemberDOB)
+                Date of Birth
             </th>
-            <th></th>
+            <th>
+                Membership
+            </th>
+            <th>
+                Currently loaned total DVDs
+            </th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.MemberLastName)
+                @item.MemberFirstName
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.MemberFirstName)
+                @item.MemberLastName
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.MemberAddress)
+                @item.MemberAddress
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.MemberDOB)
+                @item.MemberDOB
             </td>
+             <td>
+                @item.Membership
+            </td>
+             <td>
+                @if (item.TotalAcceptLoans < item.TotalCurrentLoans)
+                {
+                        <p>Too Many DVDs (@item.TotalCurrentLoans)</p>
+                    }
+                    else
+                    {
+                        @item.TotalCurrentLoans
+                    }
+                </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.MemberNumber">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.MemberNumber">Details</a> |
