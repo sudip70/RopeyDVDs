@@ -13,7 +13,7 @@ using RopeyDVD.Models;
 
 namespace RopeyDVD.Controllers
 {
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class LoansController : Controller
     {
         private readonly ApplicationDbContext _context;

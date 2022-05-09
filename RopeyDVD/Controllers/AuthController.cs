@@ -179,19 +179,13 @@ namespace RopeyDVD.Controllers
             var token = new JwtSecurityToken(
                 issuer: _configuration["JWT:ValidIssuer"],
                 audience: _configuration["JWT:ValidAudience"],
-                expires: DateTime.Now.AddHours(5),
+                expires: DateTime.Now.AddHours(1),
                 claims: authClaims,
                 signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
                 );
 
             return token;
         }
-        //public IActionResult Logout()
-        //{
-        //    HttpContext.Session.Clear();
-        //    return View("Index");
-        //}
-        //for admin dashboard
         public IActionResult Admin()
         {
             return View("Admin");
