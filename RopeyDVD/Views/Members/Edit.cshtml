@@ -1,6 +1,7 @@
 ﻿@model RopeyDVD.Models.Member
 
 @{
+    Layout = "_LayoutAdmin";
     ViewData["Title"] = "Edit";
 }
 
@@ -22,6 +23,11 @@
                 <label asp-for="MemberFirstName" class="control-label"></label>
                 <input asp-for="MemberFirstName" class="form-control" />
                 <span asp-validation-for="MemberFirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MembershipCategory" class="control-label"></label>
+                <input asp-for="MembershipCategory" class="form-control" />
+                <span asp-validation-for="MembershipCategory" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="MemberAddress" class="control-label"></label>

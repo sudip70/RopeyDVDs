@@ -17,22 +17,7 @@
     <body>
         <div id="mySidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            @*1 - DVDTitles => SelectActors => ShowDVDsofActor
-            2 - DVDTitles => SelectActors => ShowDVDCopiesofActor
-            3 - Members => SelectMembers => MemberLoans
-            4 - DVDTitles => DVDDetailsIndex
-            5 - DVDCopies => Index => Details
-            6 - Loans => Create => Paym
-            7 - Loans => Index => Edit
-            8 - Members => Index
-            9 - DVDTitles => Create
-            10 - DVDCopies => OlderCopiesDVD
-            11 - DVDCopies => SelectDate => LoanedOutDVDCopies
-            12 - Members => MemberNotBorrowed 
-            13 - DVDTitles => DVDsNotLoaned
             
-            Members => Index => Create
-            Actor => Index*@
             <a class="nav-link text-dark" asp-area="" asp-controller="DVDTitles" asp-action="SelectActors">Search DVDs</a>
             <a class="nav-link text-dark" asp-area="" asp-controller="Members" asp-action="SelectMember">Search Members</a>
             <a class="nav-link text-dark" asp-area="" asp-controller="DVDTitles" asp-action="DVDDetailsIndex">DVD Details</a>
