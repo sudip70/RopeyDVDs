@@ -2,7 +2,7 @@
 
 @{
     Layout = "_LayoutAuth";
-    ViewData["Title"] = "Register Admin";
+    ViewData["Title"] = "Register Manager";
 }
 <div class="card card-auth col-12 col-lg-8 mx-auto">
     <div class="row">
@@ -14,13 +14,13 @@
                         <img class="logo brand-img" src="~/imgs/nobg/ropey.png" alt="logo" />
                     </a>
                     <a class="btn btn-secondary" asp-area="" asp-controller="Auth" asp-action="Login">Login</a>
-                    <a class="btn btn-secondary" asp-area="" asp-controller="Auth" asp-action="RegisterUser">Register User</a>
+                    <a class="btn btn-secondary" asp-area="" asp-controller="Auth" asp-action="RegisterUser">Register Assistant</a>
                 </div>
             </div>
             <img class="card-img" alt="scenery" src="~/imgs/register.gif" />
         </div>
         <div class="col-12 col-lg-6 p-5">
-            <h2 class="mb-5 text-center">Register Admin</h2>
+            <h2 class="mb-5 text-center">Register Manager</h2>
             
             <form asp-action="RegisterAdmin">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -37,7 +37,7 @@
                     <span asp-validation-for="UserPassword" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Register Admin" class="btn btn-primary" />
+                    <input type="submit" value="Register Manager" class="btn btn-primary" />
                 </div>
                 <span class="d-lg-none d-block">
                     <p class="mb-0 mt-3 text-left">Already Have an Account?

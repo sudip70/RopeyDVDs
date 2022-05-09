@@ -4,10 +4,12 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>@ViewData["Title"] - RopeyDVD</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
         <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
         <link rel="stylesheet" href="~/css/nav-admin.css" asp-append-version="true" />
         <link rel="stylesheet" href="~/css/nav.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/footer.css" asp-append-version="true" />
         <link rel="stylesheet" href="~/RopeyDVD.styles.css" asp-append-version="true" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amatic SC">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -15,13 +17,63 @@
     <body>
         <div id="mySidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-
+            @*1 - DVDTitles => SelectActors => ShowDVDsofActor
+            2 - DVDTitles => SelectActors => ShowDVDCopiesofActor
+            3 - Members => SelectMembers => MemberLoans
+            4 - DVDTitles => DVDDetailsIndex
+            5 - DVDCopies => Index => Details
+            6 - Loans => Create => Paym
+            7 - Loans => Index => Edit
+            8 - Members => Index
+            9 - DVDTitles => Create
+            10 - DVDCopies => OlderCopiesDVD
+            11 - DVDCopies => SelectDate => LoanedOutDVDCopies
+            12 - Members => MemberNotBorrowed 
+            13 - DVDTitles => DVDsNotLoaned
+            
+            Members => Index => Create
+            Actor => Index*@
+            <a class="nav-link text-dark" asp-area="" asp-controller="DVDTitles" asp-action="SelectActors">Search DVDs</a>
             <a class="nav-link text-dark" asp-area="" asp-controller="Members" asp-action="SelectMember">Search Members</a>
             <a class="nav-link text-dark" asp-area="" asp-controller="DVDTitles" asp-action="DVDDetailsIndex">DVD Details</a>
+
             <a class="nav-link text-dark" asp-area="" asp-controller="DVDCopies" asp-action="OlderCopiesDVD">Older DVDs</a>
             <a class="nav-link text-dark" asp-area="" asp-controller="DVDCopies" asp-action="SelectDate">Select Date</a>
             <a class="nav-link text-dark" asp-area="" asp-controller="Members" asp-action="MemberNotBorrowed">Passive Members</a>
             <a class="nav-link text-dark" asp-area="" asp-controller="DVDTitles" asp-action="DVDsNotLoaned">Unpopular DVDs</a>
+
+
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" href="#collapse1">Create/Details</a>
+                        </h4>
+                    </div>
+                    <div id="collapse1" class="panel-collapse collapse">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Members" asp-action="Index">Create Members</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Actors" asp-action="Index">Create Actor</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="DVDCopies" asp-action="Index">Details DVDCopies</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Loans" asp-action="Create">Create Loans</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Loans" asp-action="Index">Index</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="DVDTitles" asp-action="Index">Create</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
         <div id="main" class="p-0">
             <header>
@@ -56,16 +108,50 @@
                 </main>
             </div>
 
-            @*<footer class="border-top footer text-muted">
-                <div class="container">
-                    &copy; 2022 - RopeyDVD
-                </div>
-            </footer>*@
+            <footer>
+        	    <div class="footer-top">
+		            <div class="container">
+		        	    <div class="row">
+		        		    <div class="col-md-4 col-lg-4 footer-about wow fadeInUp">
+		        			    <img class="logo-footer logo" src="/imgs/nobg/ropey.png" alt="logo-footer">
+		        			    <p>
+		        				    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+		        			    </p>
+	                        </div>
+		        		    <div class="col-md-4 col-lg-4 offset-lg-1 footer-contact wow fadeInDown">
+		        			    <h3>Contact</h3>
+		                	    <p><i class="fa fa-map-marker"></i><a href="https://tinyurl.com/ye26uft6" target="_blank">Kamal Marg, Kathmandu 44600</a></p>
+		                	    <p><i class="fa fa-phone"></i><a href="tel:015970012">015970012</a></p>
+		                	    <p><i class="fa fa-envelope"></i><a href="mailto:hello@domain.com">hello@domain.com</a></p>
+		                	    <p><i class="fa fa-skype"></i>Ropey_DVDS</p>
+	                        </div>
+	                        <div class="col-md-4 col-lg-3 footer-social wow fadeInUp">
+	                    	    <h3>Follow us</h3>
+	                    	    <p>
+	                    		    <a href="https://www.facebook.com/" target="_blank"><i class="fa fa-facebook"></i></a> 
+								    <a href="https://twitter.com/?lang=en" target="_blank"><i class="fa fa-twitter"></i></a> 
+								    <a href="https://www.instagram.com/" target="_blank"><i class="fa fa-instagram"></i></a> 
+								    <a href="https://www.pinterest.com/" target="_blank"><i class="fa fa-pinterest"></i></a>
+	                    	    </p>
+	                        </div>
+		                </div>
+		            </div>
+	            </div>
+	            <div class="footer-bottom text-center">
+	           	    <div class="footer-copyright">
+	                    <p class="m-0">&copy; Ropey DVDs Pvt Ltd., 2022</p>
+	                </div>
+	            </div>
+            </footer>
         </div>
         
 
         <script src="~/lib/jquery/dist/jquery.min.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
         <script>
             function openNav() {

@@ -3,36 +3,124 @@
 }
 
 <div class="text-center">
-    @*<img src="@Url.Content("~/imgs/nobg/spin.gif")" alt="logo" class="logo" />*@
-    <div class="owl-carousel owl-1">
 
-        <div class="media-29121 overlay carousel-1" style="background-image: url('/imgs/cd1.jpg');">
-          <div class="container home-carousel">
-            <div class="row justify-content-center pt-5">
-              <div class="col-md-7 pt-5 mt-4">
-                <h1 class="d-inline-block white pt-5 mt-5">Rent any DVD from RopeyDVDs</h1>
-              </div>
+    @*carousel*@
+    <div class="owl-carousel owl-1 py-4">
+        <div class="media-29121" style="background-image: url('/imgs/cd1.jpg');">
+            <div class="container home-carousel">
+                <div class="row justify-content-center pt-5">
+                    <div class="col-md-7 pt-5 mt-4">
+                        <h1 class="d-inline-block white pt-5 mt-5">Rent any DVD from RopeyDVDs</h1>
+                        <div class="col-md-5 col-12 mx-auto">
+                            <a class="btn btn-secondary" onclick="openNav()">
+                                Explore
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div> <!-- .item -->
-        <div class="media-29121 overlay" style="background-image: url('/imgs/cd2.jpg');">
-          <div class="container home-carousel-1">
-            <div class="row justify-content-center pt-5">
-              <div class="col-md-7 pt-5 mt-4">
-                <h1 class="d-inline-block white pt-5 mt-5">Rent Multiple DvDs at a time</h1>
-              </div>
+        <div class="media-29121" style="background-image: url('/imgs/cd2.jpg');">
+            <div class="container home-carousel">
+                <div class="row justify-content-center pt-5">
+                    <div class="col-md-7 pt-5 mt-4">
+                        <h1 class="d-inline-block white pt-5 mt-5">Rent Multiple DvDs at a time</h1>
+                        <div class="col-md-5 col-12 mx-auto">
+                            <a class="btn btn-secondary" onclick="openNav()">
+                                Explore
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div> <!-- .item -->
-        <div class="media-29121 overlay carousel-3" style="background-image: url('/imgs/cd3.jpg');">
-          <div class="container home-carousel">
-            <div class="row justify-content-center pt-5">
-              <div class="col-md-7 pt-5 mt-4">
-                <h1 class="d-inline-block white pt-5 mt-5">Wide Range of selections</h1>
-              </div>
+        <div class="media-29121" style="background-image: url('/imgs/cd3.jpg');">
+            <div class="container home-carousel">
+                <div class="row justify-content-center pt-5">
+                    <div class="col-md-7 pt-5 mt-4">
+                        <h1 class="d-inline-block white pt-5 mt-5">Wide Range of selections</h1>
+                        <div class="col-md-5 col-12 mx-auto">
+                            <a class="btn btn-secondary" onclick="openNav()">
+                                Explore
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div> <!-- .item -->
+    </div>
 
-      </div>
+    @*image, desc*@
+    <div class="row py-5 mt-5">
+        <div class="col-6">
+            <img src="~/imgs/cd1.jpg" alt="cd" class="home-img"/>
+        </div>
+        <div class="col-6 my-auto">
+            <h1 class="d-inline-block">Rent any DVD from RopeyDVDs</h1>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure 
+                dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat 
+                non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+            <div class="col-md-5 col-12 mx-auto">
+                <a class="btn btn-primary" onclick="openNav()">
+                    Explore
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row py-5 mt-5">
+        <div class="col-6 my-auto">
+            <h1 class="d-inline-block">Rent Multiple DvDs at a time</h1>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure 
+                dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat 
+                non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+            <div class="col-md-5 col-12 mx-auto">
+                <a class="btn btn-primary" onclick="openNav()">
+                    Explore
+                </a>
+            </div>
+        </div>
+        <div class="col-6">
+            <img src="~/imgs/cd2.jpg" alt="cd" class="home-img"/>
+        </div>
+    </div>
+    <div class="row py-5 mt-5">
+        <div class="col-6">
+            <img src="~/imgs/cd3.jpg" alt="cd" class="home-img"/>
+        </div>
+        <div class="col-6 my-auto">
+            <h1 class="d-inline-block">Wide Range of selections</h1>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure 
+                dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat 
+                non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+            <div class="col-md-5 col-12 mx-auto">
+                <a class="btn btn-primary" onclick="openNav()">
+                    Explore
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    @*card ropey*@
+    <div class="card my-5 p-5">
+        <img src="@Url.Content("~/imgs/nobg/spin.gif")" alt="logo" class="logo logo-gif" />
+        <h1 class="mb-5">renting DVDs made easy</h1>
+        
+        <div class="col-md-5 col-12 mx-auto">
+            <a class="btn btn-primary" onclick="openNav()">
+                Explore
+            </a>
+        </div>
+    </div>
 </div>
