@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="~/css/nav.css" asp-append-version="true" />
         <link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
         <link rel="stylesheet" href="~/css/owl.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/footer.css" asp-append-version="true" />
         <link rel="stylesheet" href="~/RopeyDVD.styles.css" asp-append-version="true" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amatic SC">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -24,7 +25,7 @@
               <!-- Overlay content -->
               <div class="overlay-content">
                 @*<a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Login">Login</a>*@
-                @*<a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="RegisterAdmin">Register Admin</a>*@
+                @*<a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="RegisterAdmin">Register Manager</a>*@
                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                 <a class="nav-link text-dark" asp-area="" asp-controller="DVDTitles" asp-action="SelectActors">Search DVDs</a>
                 <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Admin">Admin</a>
@@ -71,11 +72,42 @@
             </main>
         </div>
 
-        @*<footer class="border-top footer text-muted">
-            <div class="container">
-                &copy; 2022 - RopeyDVD
-            </div>
-        </footer>*@
+        <footer>
+        	<div class="footer-top">
+		        <div class="container">
+		        	<div class="row">
+		        		<div class="col-md-4 col-lg-4 footer-about wow fadeInUp">
+		        			<img class="logo-footer logo" src="/imgs/nobg/ropey.png" alt="logo-footer">
+		        			<p>
+		        				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+		        			</p>
+	                    </div>
+		        		<div class="col-md-4 col-lg-4 offset-lg-1 footer-contact wow fadeInDown">
+		        			<h3>Contact</h3>
+		                	<p><i class="fa fa-map-marker"></i><a href="https://tinyurl.com/ye26uft6" target="_blank">Kamal Marg, Kathmandu 44600</a></p>
+		                	<p><i class="fa fa-phone"></i><a href="tel:015970012">015970012</a></p>
+		                	<p><i class="fa fa-envelope"></i><a href="mailto:hello@domain.com">hello@domain.com</a></p>
+		                	<p><i class="fa fa-skype"></i>Ropey_DVDS</p>
+	                    </div>
+	                    <div class="col-md-4 col-lg-3 footer-social wow fadeInUp">
+	                    	<h3>Follow us</h3>
+	                    	<p>
+	                    		<a href="https://www.facebook.com/" target="_blank"><i class="fa fa-facebook"></i></a> 
+								<a href="https://twitter.com/?lang=en" target="_blank"><i class="fa fa-twitter"></i></a> 
+								<a href="https://www.instagram.com/" target="_blank"><i class="fa fa-instagram"></i></a> 
+								<a href="https://www.pinterest.com/" target="_blank"><i class="fa fa-pinterest"></i></a>
+	                    	</p>
+	                    </div>
+		            </div>
+		        </div>
+	        </div>
+	        <div class="footer-bottom text-center">
+	           	<div class="footer-copyright">
+	                <p class="m-0">&copy; Ropey DVDs Pvt Ltd., 2022</p>
+	            </div>
+	        </div>
+        </footer>
+
 
         <script src="~/lib/jquery/dist/jquery.min.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

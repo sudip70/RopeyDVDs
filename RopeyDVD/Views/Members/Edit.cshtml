@@ -4,13 +4,13 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
 
-<h4>Member</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
+<div class="card p-5 col-lg-9 col-12 mx-auto">
+    <h1 class="text-center">Edit Member</h1>
+
+    <hr />
+    <form asp-action="Edit">
+        <div class="row">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="MemberNumber" />
             <div class="form-group">
@@ -33,16 +33,16 @@
                 <input asp-for="MemberDOB" class="form-control" />
                 <span asp-validation-for="MemberDOB" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group col-12 col-md-4">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
-        </form>
-    </div>
+            <div class="col-12 col-md-4">
+                <a class="btn btn-secondary" asp-action="Index">Back to List</a>
+            </div>
+        </div>
+    </form>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

@@ -110,15 +110,39 @@
     }
 
 /*custom overlay content carousel*/
-.home-carousel-1 {
-    background-color: #594f5452;
-}
 .home-carousel {
-    background-color: #3a194796;
+    background-color: #594f5452;
+    box-shadow: 0px 0px 23px 20px white inset;
+    border: 2px solid #f7f6f4;
 }
-.carousel-1 {
-    filter: hue-rotate(-35deg) saturate(0.5);
-} 
-.carousel-3{
-    filter: hue-rotate(-35deg) saturate(0.5);
+
+.logo-gif {
+    max-width: 100%;
+    width: 600px;
+    height: 300px;
+    margin-right: auto;
+    margin-left: auto;
+    object-fit: cover;
+}
+
+.home-img {
+    max-height: 100%;
+    max-width: 100%;
+    border-radius: 12px;
+}
+
+
+.fa-angle-left, .fa-angle-right {
+    font-size: 40px !important;
+    color: white;
+}
+.fa-angle-left {
+    position: absolute;
+    top: -30px;
+    left: 16px;
+}
+.fa-angle-right {
+    position: absolute;
+    top: -30px;
+    right: 16px;
 }

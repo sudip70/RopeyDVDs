@@ -7,7 +7,9 @@ html {
     font-size: 16px;
   }
 }
-
+main {
+    min-height: 80vh;
+}
 /*
     colours:
     dark brown: #906946
@@ -22,7 +24,6 @@ html {
 
 body {
     background-color: #f7f6f4;
-    margin-bottom: 60px;
 }
 
 
@@ -40,7 +41,7 @@ body {
 }
 
 .btn-primary {
-    color: #fff;
+    color: #fff !important;
     background-color: #3A1947;
     border-color: #3A1947;
     width: 100%;
@@ -49,14 +50,14 @@ body {
     .btn-primary:hover,
     .btn-primary:active,
     .btn-primary:focus {
-        color: #3A1947;
-        background-color: #3A19473b;
-        border-color: #3A1947;
-        box-shadow: none;
+        color: #3A1947 !important;
+        background-color: #3A19473b !important;
+        border-color: #3A1947 !important;
+        box-shadow: none !important;
     }
 
 .btn-secondary {
-    color: #fff;
+    color: #fff !important;
     background-color: #594f54;
     border-color: #594f54;
     width: 100%;
@@ -67,9 +68,9 @@ body {
     .btn-secondary:active,
     .btn-secondary:focus {
         /*color: #594f54;*/
-        background-color: #594f549c;
-        border-color: #594f54;
-        box-shadow: none;
+        background-color: #594f549c !important;
+        border-color: #594f54 !important;
+        box-shadow: none !important;
     }
 
 .btn-danger {
@@ -128,10 +129,6 @@ input[type="date"] {
     color: dimgrey;
 }
 
-.fa-angle-left, .fa-angle-right{
-    font-size: 40px !important;
-    color: white;
-}
 
 .white{
     color:white !important;

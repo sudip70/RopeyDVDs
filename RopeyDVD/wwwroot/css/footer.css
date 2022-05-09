@@ -1,0 +1,49 @@
+﻿.footer-top {
+    padding: 60px 0;
+    background: #ab7e5d4a;
+    text-align: left;
+    color: #3A1947;
+}
+.footer-bottom {
+    padding: 15px 0;
+    background: #594f54;
+    text-align: left;
+    color: #e1d4c8;
+}
+.footer-contact i {
+    padding-right: 10px;
+    font-size: 18px;
+    color: #3A1947;
+}
+.footer-social a {
+    margin-right: 10px;
+}
+.footer-about img.logo-footer {
+    max-width: 174px;
+    margin-top: 0;
+    margin-bottom: 18px;
+}
+.footer-copyright a {
+    color: #fff !important;
+    border: 0;
+}
+.footer-contact p a {
+    color: #3A1947;
+    text-decoration: none;
+    border-bottom: 1px dashed #3A1947;
+}
+.footer-about p a {
+    color: #3A1947;
+    border-bottom: 1px dashed #3A1947;
+}
+.footer-social a {
+    display: inline-block;
+    margin-right: 20px;
+    margin-bottom: 8px;
+    color: #3A1947 !important;
+    border: 0;
+}
+.footer-social i {
+    font-size: 24px;
+    vertical-align: middle;
+}
