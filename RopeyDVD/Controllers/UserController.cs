@@ -15,18 +15,19 @@ namespace RopeyDVD.Controllers
         private readonly UserManager<IdentityUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IUserService _userService;
-        public UserController(IUserService userService,
-            UserManager<IdentityUser> userManager,
-            RoleManager<IdentityRole> roleManager
-            )
-            {
-                _userManager = userManager;
-                _roleManager = roleManager;
-                _userService = userService;
-            }
 
-            //[Authorize(Roles = "Manager, Assistant")]
-            public IActionResult Profile()
+        public UserController(IUserService userService,
+        UserManager<IdentityUser> userManager,
+        RoleManager<IdentityRole> roleManager
+        )
+        {
+            _userManager = userManager;
+            _userService = userService;
+            _roleManager = roleManager;
+        }
+
+        //[Authorize(Roles = "Manager, Assistant")]
+        public IActionResult Profile()
             {
                 return View();
             }

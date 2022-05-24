@@ -20,6 +20,7 @@ namespace RopeyDVD.Controllers
 {
     public class AuthController : Controller
     {
+        //adding user roles
         private readonly UserManager<IdentityUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IConfiguration _configuration;
@@ -49,6 +50,7 @@ namespace RopeyDVD.Controllers
             return View();
         }
 
+        //Login to the system
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(UserLoginModel loginModel)
@@ -78,6 +80,7 @@ namespace RopeyDVD.Controllers
                     Token = new JwtSecurityTokenHandler().WriteToken(token),
                     Expiration = token.ValidTo
                 };
+                //to save login details
                 CookieOptions loginCookies = new CookieOptions();
                 loginCookies.Expires = userDetails.Expiration;
                 Response.Cookies.Append("Token", userDetails.Token);
@@ -93,13 +96,14 @@ namespace RopeyDVD.Controllers
             }
             return RedirectToAction("UnauthorizedAccess");
         }
+        //for user registration view
 
         // GET: Authentication/RegisterUser
         public IActionResult RegisterUser()
         {
             return View();
         }
-
+        //for user registration
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> RegisterUser( UserRegister model)
@@ -119,6 +123,7 @@ namespace RopeyDVD.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User creation failed! Please check user details and try again." });
             return RedirectToAction("RegisterUser", "Auth");
         }
+        //for admin register 
 
         // GET: Authentication/RegisterAdmin
         public IActionResult RegisterAdmin()
@@ -165,12 +170,9 @@ namespace RopeyDVD.Controllers
         {
             return View();
         }
-        //public IActionResult Logout()
-        //{
-        //    HttpContext.Session.Clear();
-        //    return View("Index");
-        //}
 
+        //JWT token
+  
 
         private JwtSecurityToken GetToken(List<Claim> authClaims)
         {
@@ -186,6 +188,7 @@ namespace RopeyDVD.Controllers
 
             return token;
         }
+        //for logout
         public async Task<IActionResult> Logout()
         {
             if (Request.Cookies["Token"] != null)

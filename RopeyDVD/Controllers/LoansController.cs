@@ -75,6 +75,8 @@ namespace RopeyDVD.Controllers
         // POST: Loans/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // create loan
+        //6 - Loans => Create => Payment
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("LoanNumber,DateOut,DateDue,DateReturned,LoanTypeNumber,CopyNumber,MemberNumber")] Loan loan)
@@ -218,6 +220,8 @@ namespace RopeyDVD.Controllers
         // POST: Loans/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //DVD return is done by editing the loaned dvd
+        //7 - Loans => Index => Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("LoanNumber,DateOut,DateDue,DateReturned,LoanTypeNumber,CopyNumber,MemberNumber")] Loan loan)
@@ -288,6 +292,7 @@ namespace RopeyDVD.Controllers
                                                       );
             return View(loan);
         }
+        //for payment details
         public async Task<IActionResult> Payment(Loan loan)
         {
             //Using LINQ to get loan details

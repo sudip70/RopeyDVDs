@@ -24,6 +24,8 @@ namespace RopeyDVD.Controllers
         }
 
         // GET: Members
+        //List all the memmebrs
+        //8 - Members => Index
         public async Task<IActionResult> Index()
         {
             var applicationDBContext = from members in _context.Members
@@ -47,6 +49,7 @@ namespace RopeyDVD.Controllers
         }
 
         // GET: Members/Details/5
+        //Member details
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -202,11 +205,15 @@ namespace RopeyDVD.Controllers
         {
             return _context.Members.Any(e => e.MemberNumber == id);
         }
+        //Select member
+        //3 - Members => SelectMembers => MemberLoans
         public async Task<IActionResult> SelectMember(Member members)
         {
             ViewData["MemberLastName"] = new SelectList(_context.Set<Member>(), "MemberLastName", "MemberLastName", members.MemberLastName);
             return View();
         }
+        //List all the dvds loaned by selected members
+        //3 - Members => SelectMembers => MemberLoans
         public async Task<IActionResult> MemberLoans()
         {
             string memberName = Request.Form["memberList"].ToString();
@@ -226,6 +233,8 @@ namespace RopeyDVD.Controllers
                           });
             return View(data);
         }
+        //Lists all the members that have been inactive since last 31 days
+        //12 - Members => MemberNotBorrowed
         public async Task<IActionResult> MemberNotBorrowed()
         {
             var notLoanedMembers = _context.Members.ToList().Except(from m in _context.Members.ToList()

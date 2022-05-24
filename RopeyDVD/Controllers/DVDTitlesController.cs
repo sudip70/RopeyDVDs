@@ -205,6 +205,7 @@ namespace RopeyDVD.Controllers
         {
             return _context.DVDTitles.Any(e => e.DVDNumber == id);
         }
+        //Lists all the DVDs present
         public async Task<IActionResult> DVDDetailsIndex()
         {
             var data = from DVDTitle in _context.DVDTitles
@@ -227,11 +228,14 @@ namespace RopeyDVD.Controllers
             data.OrderBy(c => c.Cast);
             return View(data);
         }
+        //Selects actor to search the dvds by actor last name
         public async Task<IActionResult> SelectActors(Actor actors)
         {
             ViewData["ActorSurName"] = new SelectList(_context.Set<Actor>(), "ActorSurName", "ActorSurName", actors.ActorSurName);
             return View();
         }
+        //Shows dvds of the selected actors
+        //1 - DVDTitles => SelectActors => ShowDVDsofActor
         public async Task<IActionResult> ShowDVDsofActors()
         {
             string actorName = Request.Form["actorList"].ToString();
@@ -247,11 +251,13 @@ namespace RopeyDVD.Controllers
                                   join Actor in _context.Actors on casts.ActorNumber equals Actor.ActorNumber
                                   group Actor by new { casts.DVDNumber } into g
                                   select
-                                    String.Join(" , ", g.OrderBy(c => c.ActorNumber).Select(x => (x.ActorFirstName + "" + x.ActorSurName))),
+                                    String.Join(" , ", g.OrderBy(c => c.ActorNumber).Select(x => (x.ActorFirstName + " " + x.ActorSurName))),
 
                        };
             return View(data);
         }
+        //Lists the dvd copies of the selected actor
+        //2 - DVDTitles => SelectActors => ShowDVDCopiesofActor
         public async Task<IActionResult> ShowDVDCopiesofActors()
         {
             string actorName = Request.Form["actorList"].ToString();
@@ -280,6 +286,8 @@ namespace RopeyDVD.Controllers
             return View(data);
 
         }
+        //DVDs not loaned in last 31 days
+        //13 - DVDTitles => DVDsNotLoaned
         public async Task<IActionResult> DVDsNotLoaned()
         {
             var differenceDate = DateTime.Now.AddDays(-30);

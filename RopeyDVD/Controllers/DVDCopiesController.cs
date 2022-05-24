@@ -178,7 +178,8 @@ namespace RopeyDVD.Controllers
             //ViewData["SelectedDate"] = new SelectList(_context.Set<Member>(), "MemberFirstName", "MemberFirstName", members.MemberFirstName);
             return View();
         }
-
+        //Shows older copies
+        //10 - DVDCopies => OlderCopiesDVD
         public async Task<IActionResult> OlderCopiesDVD()
         {
             var loanedCopiesDVD = (from loan in _context.Loans
@@ -196,7 +197,8 @@ namespace RopeyDVD.Controllers
                                     );
             return View(await notloanedCopiesDVD.ToListAsync());
         }
-
+        //Remove older copies
+        //10 - DVDCopies => OlderCopiesDVD
         public async Task<IActionResult> RemovedOldCopies()
         {
             var loanedCopiesDVD = (from loan in _context.Loans
@@ -226,6 +228,8 @@ namespace RopeyDVD.Controllers
             return RedirectToAction("Index");
 
         }
+        //Loaned out copies
+        //11 - DVDCopies => SelectDate => LoanedOutDVDCopies
         public async Task<IActionResult> LoanedOutDVDCopies()
         {
 
