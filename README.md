@@ -1,3 +1,8 @@
-# ropey
+# RopeyDVD
+
 Group work for Application development 
-RopeyDVD
+
+# Features
+
+- Booking and Sell of DVDs
+- Rent and Return DVDs
